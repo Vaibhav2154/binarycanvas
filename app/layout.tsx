@@ -18,6 +18,10 @@ export const metadata: Metadata = {
     description: 'Portfolio showcasing projects, achievements, and technical expertise',
     type: 'website',
   },
+  // Performance optimizations
+  other: {
+    'color-scheme': 'dark light',
+  },
 };
 
 export default function RootLayout({
@@ -29,13 +33,17 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preload critical resources */}
+        <link rel="preload" as="style" href="/globals.css" />
       </head>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
-          disableTransitionOnChange={false}
+          disableTransitionOnChange={true}
         >
           {children}
           <Toaster />

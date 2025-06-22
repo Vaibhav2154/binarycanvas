@@ -56,12 +56,14 @@ const Education = () => {
                 initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
+                whileHover={{ scale: 1.02, y: -8 }}
+                className="group"
               >
-                <Card className="hover:shadow-lg transition-shadow">
+                <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 glass">
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                        <div className="w-12 h-12 bg-gradient-to-r from-primary/20 to-primary/30 group-hover:from-primary/30 group-hover:to-primary/40 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                           {index === 0 ? (
                             <GraduationCap className="h-6 w-6 text-primary" />
                           ) : (

@@ -96,12 +96,14 @@ const Experience = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02, y: -8 }}
+                className="group"
               >
-                <Card className="hover:shadow-lg transition-shadow">
+                <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 glass">
                   <CardHeader className="pb-4">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                       <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <div className="w-12 h-12 bg-gradient-to-r from-primary/20 to-primary/30 group-hover:from-primary/30 group-hover:to-primary/40 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110">
                           <exp.icon className="h-6 w-6 text-primary" />
                         </div>
                         <div>

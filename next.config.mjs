@@ -1,14 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  images: { 
-    unoptimized: true,
-    formats: ['image/webp', 'image/avif']
-  },
-  
   // Performance optimizations
   swcMinify: true,
   compiler: {
@@ -16,20 +7,15 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   
+  // Experimental features for better performance
   experimental: {
+    // Enable server components by default
+    serverComponentsExternalPackages: ['three'],
     // Optimize bundling
     optimizePackageImports: ['@react-three/fiber', '@react-three/drei', 'framer-motion'],
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
   },
   
-  // Bundle optimization
+  // Bundle analyzer for production builds
   webpack: (config, { isServer, dev }) => {
     // Optimize for production
     if (!dev && !isServer) {
@@ -55,6 +41,11 @@ const nextConfig = {
     
     return config;
   },
+  
+  // Image optimization
+  images: {
+    formats: ['image/webp', 'image/avif'],
+  },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

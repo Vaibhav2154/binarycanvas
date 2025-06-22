@@ -23,8 +23,8 @@ const Contact = () => {
     {
       icon: Phone,
       label: "Phone",
-      value: "+91 XXXXX XXXXX",
-      href: "tel:+91XXXXXXXXXX"
+      value: "+91 9900450852",
+      href: "tel:+919900450852"
     },
     {
       icon: MapPin,
@@ -44,7 +44,7 @@ const Contact = () => {
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/vaibhav-m-n",
+      href: "https://www.linkedin.com/in/vaibhav-m-n-a6b071282/",
       username: "Vaibhav M N"
     },
     {
@@ -80,7 +80,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container px-4 mx-auto sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -88,36 +88,38 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">Get In Touch</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-6 text-3xl font-bold sm:text-4xl">Get In Touch</h2>
+            <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
               I'm always open to discussing new opportunities, interesting projects, 
               or just having a conversation about technology and innovation.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 gap-8 mb-12 lg:grid-cols-2">
             {/* Contact Information */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="group"
             >
-              <Card>
+              <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 glass">
                 <CardContent className="p-8">
-                  <h3 className="text-xl font-bold mb-6">Contact Information</h3>
+                  <h3 className="mb-6 text-xl font-bold">Contact Information</h3>
                   <div className="space-y-4">
                     {contactInfo.map((info, index) => (
                       <div key={index} className="flex items-center space-x-4">
-                        <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                          <info.icon className="h-5 w-5 text-primary" />
+                        <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-primary/20 to-primary/30 group-hover:from-primary/30 group-hover:to-primary/40 transition-all duration-300 group-hover:scale-110">
+                          <info.icon className="w-5 h-5 text-primary" />
                         </div>
                         <div>
                           <div className="text-sm text-muted-foreground">{info.label}</div>
                           {info.href ? (
                             <a 
                               href={info.href}
-                              className="font-medium hover:text-primary transition-colors"
+                              className="font-medium transition-colors hover:text-primary"
                             >
                               {info.value}
                             </a>
@@ -130,7 +132,7 @@ const Contact = () => {
                   </div>
 
                   <div className="mt-8">
-                    <h4 className="font-semibold mb-4">Social Media</h4>
+                    <h4 className="mb-4 font-semibold">Social Media</h4>
                     <div className="space-y-3">
                       {socialLinks.map((social, index) => (
                         <motion.a
@@ -140,9 +142,9 @@ const Contact = () => {
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className="flex items-center space-x-3 p-3 bg-accent/50 rounded-lg hover:bg-accent transition-colors"
+                          className="flex items-center p-3 space-x-3 transition-colors rounded-lg bg-accent/50 hover:bg-accent"
                         >
-                          <social.icon className="h-5 w-5 text-primary" />
+                          <social.icon className="w-5 h-5 text-primary" />
                           <div>
                             <div className="font-medium">{social.label}</div>
                             <div className="text-sm text-muted-foreground">{social.username}</div>
@@ -162,31 +164,34 @@ const Contact = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="space-y-6"
             >
-              <Card>
-                <CardContent className="p-8">
-                  <h3 className="text-xl font-bold mb-6">Quick Actions</h3>
-                  <div className="space-y-3">
-                    {quickLinks.map((link, index) => (
-                      <Button
-                        key={index}
-                        variant="outline"
-                        className="w-full justify-start"
-                        asChild
-                      >
-                        <a href={link.href} target="_blank" rel="noopener noreferrer">
-                          <link.icon className="mr-2 h-4 w-4" />
-                          {link.label}
-                        </a>
-                      </Button>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              <motion.div whileHover={{ scale: 1.02, y: -5 }} className="group">
+                <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 glass">
+                  <CardContent className="p-8">
+                    <h3 className="mb-6 text-xl font-bold">Quick Actions</h3>
+                    <div className="space-y-3">
+                      {quickLinks.map((link, index) => (
+                        <Button
+                          key={index}
+                          variant="outline"
+                          className="justify-start w-full"
+                          asChild
+                        >
+                          <a href={link.href} target="_blank" rel="noopener noreferrer">
+                            <link.icon className="w-4 h-4 mr-2" />
+                            {link.label}
+                          </a>
+                        </Button>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
-              <Card>
+              <motion.div whileHover={{ scale: 1.02, y: -5 }} className="group">
+                <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 glass">
                 <CardContent className="p-8">
-                  <h3 className="text-xl font-bold mb-4">Let's Collaborate</h3>
-                  <p className="text-muted-foreground mb-6">
+                  <h3 className="mb-4 text-xl font-bold">Let's Collaborate</h3>
+                  <p className="mb-6 text-muted-foreground">
                     Interested in working together? Whether it's a hackathon, open source project, 
                     or innovative startup idea, I'm always excited to collaborate with fellow 
                     developers and creators.
@@ -197,13 +202,14 @@ const Contact = () => {
                     asChild
                   >
                     <a href="mailto:vaibhavvaibhu2005@gmail.com">
-                      <Mail className="mr-2 h-5 w-5" />
+                      <Mail className="w-5 h-5 mr-2" />
                       Send Me an Email
                     </a>
                   </Button>
                 </CardContent>
               </Card>
             </motion.div>
+          </motion.div>
           </div>
 
           {/* CTA Section */}
@@ -211,16 +217,17 @@ const Contact = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
+            whileHover={{ scale: 1.02 }}
             className="text-center"
           >
-            <Card className="p-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-none">
-              <h3 className="text-2xl font-bold mb-4">Ready to Build Something Amazing?</h3>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+            <Card className="p-8 border-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 shadow-xl hover:shadow-2xl transition-all duration-300 glass">
+              <h3 className="mb-4 text-2xl font-bold">Ready to Build Something Amazing?</h3>
+              <p className="max-w-2xl mx-auto mb-6 text-muted-foreground">
                 I'm currently open to new opportunities and exciting projects. 
                 Whether you're looking for a developer, a team member, or a collaborator, 
                 let's connect and create something extraordinary together.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <Button size="lg" asChild>
                   <a href="mailto:vaibhavvaibhu2005@gmail.com">
                     Start a Conversation

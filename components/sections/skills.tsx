@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Code, Smartphone, Database, Cloud, Shield, Wrench } from 'lucide-react';
-import SkillsThreeBackground from '@/components/three/skills-visualization';
 
 const Skills = () => {
   const [ref, inView] = useInView({
@@ -71,7 +70,8 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-20 bg-muted/30 relative">
-      <SkillsThreeBackground />
+      {/* Removed 3D Background for performance */}
+      {/* <SkillsThreeBackground /> */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
@@ -94,11 +94,13 @@ const Skills = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02, y: -8 }}
+                className="group"
               >
-                <Card className="h-full">
+                <Card className="h-full border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 glass">
                   <CardHeader className="pb-4">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <div className="w-10 h-10 bg-gradient-to-r from-primary/20 to-primary/30 group-hover:from-primary/30 group-hover:to-primary/40 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                         <category.icon className="h-5 w-5 text-primary" />
                       </div>
                       <h3 className="text-xl font-bold">{category.title}</h3>
@@ -133,11 +135,13 @@ const Skills = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
+            whileHover={{ scale: 1.02, y: -5 }}
+            className="group"
           >
-            <Card>
+            <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 glass">
               <CardHeader>
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <div className="w-10 h-10 bg-gradient-to-r from-primary/20 to-primary/30 group-hover:from-primary/30 group-hover:to-primary/40 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                     <Shield className="h-5 w-5 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold">Certifications & Specializations</h3>

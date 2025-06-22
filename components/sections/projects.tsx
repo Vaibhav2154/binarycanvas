@@ -8,7 +8,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ExternalLink, Github, Award, Shield, Smartphone, Brain, Heart } from 'lucide-react';
-import ProjectsThreeBackground from '@/components/three/projects-visualization';
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -90,9 +89,8 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="projects" className="py-20 relative">
-      <ProjectsThreeBackground />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="projects" className="relative py-20">
+      <div className="container relative z-10 px-4 mx-auto border-blue-200 sm:px-6 lg:px-8-">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -100,30 +98,32 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">Featured Projects</h2>
+          <div className="mb-16 text-center border-blue-200">
+            <h2 className="mb-6 text-3xl font-bold sm:text-4xl">Featured Projects</h2>
             <p className="text-lg text-muted-foreground">
               Innovative solutions built with cutting-edge technologies
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8 border-blue-200 md:grid-cols-2 lg:grid-cols-2">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02, y: -10 }}
+                className="group"
               >
-                <Card className="h-full hover:shadow-lg transition-all duration-300 group">
+                <Card className="h-full transition-all duration-300 border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 group glass">
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start space-x-3">
-                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                          <project.icon className="h-6 w-6 text-primary" />
+                        <div className="flex items-center justify-center w-12 h-12 transition-all duration-300 rounded-lg bg-gradient-to-r from-primary/20 to-primary/30 group-hover:from-primary/30 group-hover:to-primary/40 group-hover:scale-110">
+                          <project.icon className="w-6 h-6 text-primary" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-xl font-bold mb-1">{project.title}</h3>
+                          <h3 className="mb-1 text-xl font-bold">{project.title}</h3>
                           {project.award && (
                             <Badge variant="destructive" className="mb-2">
                               {project.award}
@@ -154,13 +154,13 @@ const Projects = () => {
                       <DialogTrigger asChild>
                         <Button variant="outline" className="w-full">
                           View Details
-                          <ExternalLink className="ml-2 h-4 w-4" />
+                          <ExternalLink className="w-4 h-4 ml-2" />
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                         <DialogHeader>
                           <DialogTitle className="flex items-center space-x-2">
-                            <project.icon className="h-6 w-6" />
+                            <project.icon className="w-6 h-6" />
                             <span>{project.title}</span>
                             {project.award && (
                               <Badge variant="destructive">{project.award}</Badge>
@@ -168,12 +168,12 @@ const Projects = () => {
                           </DialogTitle>
                         </DialogHeader>
                         <div className="space-y-6">
-                          <p className="text-muted-foreground leading-relaxed">
+                          <p className="leading-relaxed text-muted-foreground">
                             {project.fullDescription}
                           </p>
                           
                           <div>
-                            <h4 className="font-semibold mb-3">Key Features</h4>
+                            <h4 className="mb-3 font-semibold">Key Features</h4>
                             <ul className="space-y-2">
                               {project.features.map((feature, fIndex) => (
                                 <li key={fIndex} className="flex items-start space-x-2">
@@ -185,7 +185,7 @@ const Projects = () => {
                           </div>
 
                           <div>
-                            <h4 className="font-semibold mb-3">Technologies Used</h4>
+                            <h4 className="mb-3 font-semibold">Technologies Used</h4>
                             <div className="flex flex-wrap gap-2">
                               {project.technologies.map((tech, techIndex) => (
                                 <Badge key={techIndex} variant="secondary">
@@ -197,11 +197,11 @@ const Projects = () => {
 
                           {project.achievements && (
                             <div>
-                              <h4 className="font-semibold mb-3">Achievements</h4>
+                              <h4 className="mb-3 font-semibold">Achievements</h4>
                               <div className="space-y-2">
                                 {project.achievements.map((achievement, aIndex) => (
                                   <div key={aIndex} className="flex items-center space-x-2">
-                                    <Award className="h-4 w-4 text-primary" />
+                                    <Award className="w-4 h-4 text-primary" />
                                     <span className="text-sm">{achievement}</span>
                                   </div>
                                 ))}
@@ -218,7 +218,8 @@ const Projects = () => {
           </div>
         </motion.div>
       </div>
-      <ProjectsThreeBackground />
+      {/* Removed 3D Background for performance */}
+      {/* <ProjectsThreeBackground /> */}
     </section>
   );
 };

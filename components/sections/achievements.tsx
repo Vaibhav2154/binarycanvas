@@ -112,9 +112,11 @@ const Achievements = () => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="group"
               >
-                <Card className="text-center p-4 lg:p-6 hover:shadow-lg transition-shadow">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 mx-auto mb-3 bg-primary/10 rounded-lg flex items-center justify-center">
+                <Card className="text-center p-4 lg:p-6 border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 glass">
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 mx-auto mb-3 bg-gradient-to-r from-primary/20 to-primary/30 group-hover:from-primary/30 group-hover:to-primary/40 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110">
                     <stat.icon className="h-5 w-5 lg:h-6 lg:w-6 text-primary" />
                   </div>
                   <div className="text-xl lg:text-2xl font-bold text-primary mb-1">{stat.value}</div>
@@ -132,8 +134,10 @@ const Achievements = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02, y: -8 }}
+                className="group"
               >
-                <Card className="h-full hover:shadow-lg transition-all duration-300 group overflow-hidden">
+                <Card className="h-full border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 glass overflow-hidden">
                   <CardContent className="p-6 h-full">
                     <div className="flex items-start space-x-4 h-full">
                       <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${achievement.color} group-hover:scale-110 transition-transform`}>
@@ -163,9 +167,10 @@ const Achievements = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
+            whileHover={{ scale: 1.02 }}
             className="text-center mt-16"
           >
-            <Card className="p-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-none">
+            <Card className="p-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 glass">
               <div className="max-w-2xl mx-auto">
                 <h3 className="text-2xl font-bold mb-4">Always Striving for Excellence</h3>
                 <p className="text-muted-foreground mb-6">

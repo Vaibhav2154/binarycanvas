@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail, Download, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import HeroThreeBackground from '@/components/three/hero-background';
 import FloatingTechIcons from '@/components/three/floating-tech-icons';
 
 const Hero = () => {
@@ -46,14 +45,9 @@ const Hero = () => {
 
   return (
     <section id='hero' className="relative flex items-center justify-center min-h-screen overflow-hidden">
-      {/* 3D Background */}
+      {/* Floating Tech Icons */}
       {isClient && (
-        <>
-          {/* <HeroThreeBackground /> */}
-          <br />
-          <br />
-          <FloatingTechIcons />
-        </>
+        <FloatingTechIcons />
       )}
 
       {/* Gradient Background */}
@@ -180,7 +174,7 @@ const Hero = () => {
             >
               {[
                 { icon: Github, href: "https://github.com/Vaibhav2154", color: "hover:text-gray-600" },
-                { icon: Linkedin, href: "https://linkedin.com/in/vaibhav-m-n", color: "hover:text-blue-600" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/vaibhav-m-n-a6b071282/", color: "hover:text-blue-600" },
                 { icon: Mail, href: "mailto:vaibhavvaibhu2005@gmail.com", color: "hover:text-red-500" }
               ].map((social, index) => (
                 <motion.a
