@@ -39,10 +39,15 @@ export const performanceConfig = {
   },
 };
 
-// Device detection
+// Device detection - safe for SSR
 export const isMobileDevice = () => {
   if (typeof window === 'undefined') return false;
-  return window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  try {
+    return window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  } catch (error) {
+    return false;
+  }
 };
 
 // Performance monitoring

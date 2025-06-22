@@ -1,0 +1,17 @@
+{
+  "name": "Vaibhav M N Portfolio",
+  "short_name": "Vaibhav MN",
+  "description": "Computer Science student and Full Stack Developer specializing in Flutter, Next.js, and AI/ML.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#8b5cf6",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}

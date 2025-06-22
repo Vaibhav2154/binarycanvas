@@ -2,15 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Mail, Sun, Moon } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ThemeToggle from '@/components/theme-toggle';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   const navItems = [
@@ -35,6 +34,8 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
+    
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
@@ -55,9 +56,11 @@ const Header = () => {
     handleScroll(); // Initial check
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [navItems]);
+  }, [navItems, mounted]);
 
   const scrollToSection = (href: string) => {
+    if (!mounted) return;
+    
     const element = document.querySelector(href);
     if (element) {
       const headerOffset = 80;
@@ -73,11 +76,14 @@ const Header = () => {
   };
 
   const toggleMobileMenu = () => {
+    if (!mounted) return;
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   // Close mobile menu when clicking outside
   useEffect(() => {
+    if (!mounted) return;
+    
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
       if (isMobileMenuOpen && !target.closest('.mobile-menu') && !target.closest('.mobile-menu-button')) {
@@ -87,10 +93,12 @@ const Header = () => {
 
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, mounted]);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
+    if (!mounted) return;
+    
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -100,50 +108,53 @@ const Header = () => {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, mounted]);
 
   return (
     <>
       <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        initial={false}
+        animate={mounted ? { y: 0, opacity: 1 } : { y: 0, opacity: 1 }}
+        transition={{ duration: mounted ? 0.5 : 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg border-b border-gray-200/20 dark:border-gray-800/20'
             : 'bg-transparent'
         }`}
+        suppressHydrationWarning
       >
-        <div className="container px-4 mx-auto sm:px-6 lg:px-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={mounted ? { scale: 1.05 } : {}}
+              whileTap={mounted ? { scale: 0.95 } : {}}
               className="flex items-center space-x-2 cursor-pointer"
               onClick={() => scrollToSection('#hero')}
+              suppressHydrationWarning
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600">
-                <span className="text-lg font-bold text-white">V</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-violet-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">V</span>
               </div>
-              <span className="hidden text-xl font-bold text-gray-900 dark:text-white sm:block">
+              <span className="text-xl font-bold text-gray-900 dark:text-white hidden sm:block">
                 Vaibhav M N
               </span>
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="items-center hidden space-x-1 lg:flex">
+            <nav className="hidden lg:flex items-center space-x-1">
               {navItems.map((item) => (
                 <motion.button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={mounted ? { scale: 1.05 } : {}}
+                  whileTap={mounted ? { scale: 0.95 } : {}}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     activeSection === item.href.substring(1)
                       ? 'bg-violet-600 text-white shadow-lg'
                       : 'text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800'
                   }`}
+                  suppressHydrationWarning
                 >
                   {item.name}
                 </motion.button>
@@ -151,7 +162,7 @@ const Header = () => {
             </nav>
 
             {/* Desktop Actions */}
-            <div className="items-center hidden space-x-4 lg:flex">
+            <div className="hidden lg:flex items-center space-x-4">
               {/* Social Links */}
               <div className="flex items-center space-x-2">
                 {socialLinks.map((social) => (
@@ -160,10 +171,11 @@ const Header = () => {
                     href={social.href}
                     target={social.href.startsWith('mailto:') ? '_self' : '_blank'}
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="p-2 text-gray-700 transition-colors rounded-lg dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    whileHover={mounted ? { scale: 1.1, y: -2 } : {}}
+                    whileTap={mounted ? { scale: 0.9 } : {}}
+                    className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                     title={social.label}
+                    suppressHydrationWarning
                   >
                     <social.icon className="w-5 h-5" />
                   </motion.a>
@@ -171,68 +183,41 @@ const Header = () => {
               </div>
 
               {/* Theme Toggle */}
-              {mounted && (
-                <motion.button
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-2 text-gray-700 transition-colors rounded-lg dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  title="Toggle theme"
-                >
-                  {theme === 'dark' ? (
-                    <Sun className="w-5 h-5" />
-                  ) : (
-                    <Moon className="w-5 h-5" />
-                  )}
-                </motion.button>
-              )}
+              <ThemeToggle />
             </div>
 
             {/* Mobile Menu Button */}
             <div className="flex items-center space-x-2 lg:hidden">
               {/* Mobile Theme Toggle */}
-              {mounted && (
-                <motion.button
-                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-2 text-gray-700 rounded-lg dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400"
-                  title="Toggle theme"
-                >
-                  {theme === 'dark' ? (
-                    <Sun className="w-5 h-5" />
-                  ) : (
-                    <Moon className="w-5 h-5" />
-                  )}
-                </motion.button>
-              )}
+              <ThemeToggle size="sm" />
 
               {/* Mobile Menu Toggle */}
               <motion.button
                 onClick={toggleMobileMenu}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-2 text-gray-700 transition-colors rounded-lg mobile-menu-button dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                whileHover={mounted ? { scale: 1.1 } : {}}
+                whileTap={mounted ? { scale: 0.9 } : {}}
+                className="mobile-menu-button p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 aria-label="Toggle mobile menu"
+                suppressHydrationWarning
               >
                 <AnimatePresence mode="wait">
                   {isMobileMenuOpen ? (
                     <motion.div
                       key="close"
-                      initial={{ rotate: -90, opacity: 0 }}
+                      initial={mounted ? { rotate: -90, opacity: 0 } : { rotate: 0, opacity: 1 }}
                       animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      exit={mounted ? { rotate: 90, opacity: 0 } : { rotate: 0, opacity: 1 }}
+                      transition={{ duration: mounted ? 0.2 : 0 }}
                     >
                       <X className="w-6 h-6" />
                     </motion.div>
                   ) : (
                     <motion.div
                       key="menu"
-                      initial={{ rotate: 90, opacity: 0 }}
+                      initial={mounted ? { rotate: 90, opacity: 0 } : { rotate: 0, opacity: 1 }}
                       animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      exit={mounted ? { rotate: -90, opacity: 0 } : { rotate: 0, opacity: 1 }}
+                      transition={{ duration: mounted ? 0.2 : 0 }}
                     >
                       <Menu className="w-6 h-6" />
                     </motion.div>
@@ -246,7 +231,7 @@ const Header = () => {
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobileMenuOpen && mounted && (
           <>
             {/* Backdrop */}
             <motion.div
@@ -292,9 +277,9 @@ const Header = () => {
                       <motion.button
                         key={item.name}
                         onClick={() => scrollToSection(item.href)}
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={mounted ? { opacity: 0, x: 20 } : { opacity: 1, x: 0 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
+                        transition={{ delay: mounted ? index * 0.1 : 0 }}
                         className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
                           activeSection === item.href.substring(1)
                             ? 'bg-violet-600 text-white shadow-lg'
@@ -316,10 +301,11 @@ const Header = () => {
                         href={social.href}
                         target={social.href.startsWith('mailto:') ? '_self' : '_blank'}
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1, y: -2 }}
-                        whileTap={{ scale: 0.9 }}
+                        whileHover={mounted ? { scale: 1.1, y: -2 } : {}}
+                        whileTap={mounted ? { scale: 0.9 } : {}}
                         className="p-3 text-gray-700 transition-colors bg-gray-100 rounded-full dark:bg-gray-800 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400"
                         title={social.label}
+                        suppressHydrationWarning
                       >
                         <social.icon className="w-6 h-6" />
                       </motion.a>

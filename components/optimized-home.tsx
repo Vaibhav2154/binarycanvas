@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/sections/header';
 import Hero from '@/components/sections/hero';
@@ -18,20 +18,35 @@ const Contact = lazy(() => import('@/components/sections/contact'));
 
 // Loading component with reduced animation for mobile
 const SectionSkeleton = () => {
-  const isMobile = isMobileDevice();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isMobile = mounted ? isMobileDevice() : false;
   
   return (
-    <div className={`w-full h-96 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 rounded-lg ${
-      isMobile ? '' : 'animate-pulse'
-    }`} />
+    <div 
+      className={`w-full h-96 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 rounded-lg ${
+        isMobile ? '' : 'animate-pulse'
+      }`}
+      suppressHydrationWarning
+    />
   );
 };
 
 export default function OptimizedHome() {
-  const isMobile = isMobileDevice();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isMobile = mounted ? isMobileDevice() : false;
   
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground" suppressHydrationWarning>
       {/* Main Content */}
       <div className="relative z-10">
         <Header />
