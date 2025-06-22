@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -73,21 +74,11 @@ export default function RootLayout({
         {/* Touch icons */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="manifest" href="/site.webmanifest" />
-        <script dangerouslySetInnerHTML={{
-          __html: `
-          var _paq = window._paq = window._paq || [];
-          /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-          _paq.push(['trackPageView']);
-          _paq.push(['enableLinkTracking']);
-          (function() {
-            var u="https://binaryanvasvercel.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u+'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.async=true; g.src='https://cdn.matomo.cloud/binaryanvasvercel.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-          })();
-          `
-        }} />
+         <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="06e731ee-137f-4e26-b751-567b90262e82"
+          strategy="afterInteractive"
+        />
       </head>
       
       <body className={inter.className}>
