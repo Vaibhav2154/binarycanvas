@@ -1,27 +1,52 @@
-import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Vaibhav M N - Computer Science Student & Developer',
-  description: 'Portfolio of Vaibhav M N - Computer Science student, Flutter developer, and cybersecurity enthusiast with experience in ML, AI, and hackathon victories.',
-  keywords: 'Vaibhav M N, Computer Science, Flutter Developer, Machine Learning, Cybersecurity, Portfolio',
+  title: 'Vaibhav M N - Full Stack Developer',
+  description: 'Computer Science student and Full Stack Developer specializing in Flutter, Next.js, and AI/ML. Creating innovative solutions that bridge technology and real-world impact.',
+  keywords: ['Vaibhav M N', 'Full Stack Developer', 'Flutter Developer', 'Next.js', 'AI/ML', 'Computer Science'],
   authors: [{ name: 'Vaibhav M N' }],
   creator: 'Vaibhav M N',
-  viewport: 'width=device-width, initial-scale=1',
+  publisher: 'Vaibhav M N',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Vaibhav M N',
+  },
   openGraph: {
-    title: 'Vaibhav M N - Computer Science Student & Developer',
-    description: 'Portfolio showcasing projects, achievements, and technical expertise',
     type: 'website',
+    locale: 'en_US',
+    url: 'https://vaibhav-portfolio.vercel.app',
+    title: 'Vaibhav M N - Full Stack Developer',
+    description: 'Computer Science student and Full Stack Developer specializing in Flutter, Next.js, and AI/ML.',
+    siteName: 'Vaibhav M N Portfolio',
   },
-  // Performance optimizations
-  other: {
-    'color-scheme': 'dark light',
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Vaibhav M N - Full Stack Developer',
+    description: 'Computer Science student and Full Stack Developer specializing in Flutter, Next.js, and AI/ML.',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
 };
 
 export default function RootLayout({
@@ -32,18 +57,31 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Mobile-specific meta tags */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Vaibhav M N" />
+        <meta name="application-name" content="Vaibhav M N Portfolio" />
+        <meta name="msapplication-TileColor" content="#8b5cf6" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        
+        {/* Performance hints */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Preload critical resources */}
-        <link rel="preload" as="style" href="/globals.css" />
+        
+        {/* Touch icons */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
-          disableTransitionOnChange={true}
+          disableTransitionOnChange
         >
           {children}
           <Toaster />

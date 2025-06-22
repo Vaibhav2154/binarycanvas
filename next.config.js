@@ -8,9 +8,7 @@ const nextConfig = {
     unoptimized: true,
     formats: ['image/webp', 'image/avif']
   },
-  
-  // Performance optimizations
-  swcMinify: true,
+    // Performance optimizations
   compiler: {
     // Remove console logs in production
     removeConsole: process.env.NODE_ENV === 'production',

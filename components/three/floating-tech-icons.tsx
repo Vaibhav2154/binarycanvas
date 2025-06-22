@@ -122,15 +122,15 @@ function FloatingIcon({
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ 
-            delay: 0.5, // Same delay for all icons
+            delay: 0.5,
             duration: 0.8,
             type: "spring",
             stiffness: 120 
           }}
+          className="tech-icon-container"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            width: isMobile ? '56px' : '88px',
+            height: isMobile ? '56px' : '88px',
             background: 'rgba(255, 255, 255, 0.1)',
             backdropFilter: 'blur(10px)',
             borderRadius: '50%',
@@ -138,6 +138,7 @@ function FloatingIcon({
             border: `${isMobile ? '1px' : '2px'} solid ${color}`,
             boxShadow: `0 0 ${isMobile ? '15px' : '30px'} ${color}40, 0 0 ${isMobile ? '30px' : '60px'} ${color}20`,
             animation: `uniformFloat 4s ease-in-out infinite`,
+            overflow: 'hidden',
           }}
           whileHover={{
             scale: isMobile ? 1.1 : 1.2,

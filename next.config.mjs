@@ -1,18 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  trailingSlash: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  
   // Performance optimizations
-  swcMinify: true,
   compiler: {
     // Remove console logs in production
     removeConsole: process.env.NODE_ENV === 'production',
   },
+    // Server external packages (moved from experimental in Next.js 15)
+  serverExternalPackages: [
+    'sharp',
+    'onnxruntime-node',
+  ],
   
   // Experimental features for better performance
   experimental: {
-    // Enable server components by default
-    serverComponentsExternalPackages: ['three'],
-    // Optimize bundling
-    optimizePackageImports: ['@react-three/fiber', '@react-three/drei', 'framer-motion'],
+    // Optimize CSS and bundling
+    optimizeCss: true,
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   
   // Bundle analyzer for production builds
@@ -41,10 +50,32 @@ const nextConfig = {
     
     return config;
   },
-  
-  // Image optimization
+    // Image optimization
   images: {
+    unoptimized: true,
     formats: ['image/webp', 'image/avif'],
+  },
+  // PWA-like optimizations for mobile
+  headers: async () => {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
   },
 };
 

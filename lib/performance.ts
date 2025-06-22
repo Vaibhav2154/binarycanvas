@@ -29,6 +29,20 @@ export const performanceConfig = {
     threshold: 0.1,
     rootMargin: "50px",
   },
+  
+  // Mobile detection and performance
+  mobile: {
+    disableThreeJS: true,
+    reduceAnimations: true,
+    maxParticles: 0,
+    simplifyEffects: true,
+  },
+};
+
+// Device detection
+export const isMobileDevice = () => {
+  if (typeof window === 'undefined') return false;
+  return window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
 
 // Performance monitoring
@@ -66,6 +80,23 @@ export const throttle = <T extends (...args: any[]) => void>(
       func(...args);
       inThrottle = true;
       setTimeout(() => inThrottle = false, limit);
+    }
+  };
+};
+
+// Frame rate optimization
+export const optimizeFrameRate = () => {
+  if (typeof window === 'undefined') return;
+  
+  let lastFrameTime = 0;
+  const targetFPS = isMobileDevice() ? 30 : 60;
+  const frameInterval = 1000 / targetFPS;
+  
+  return (callback: () => void) => {
+    const now = performance.now();
+    if (now - lastFrameTime >= frameInterval) {
+      lastFrameTime = now;
+      callback();
     }
   };
 };

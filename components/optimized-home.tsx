@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Header from '@/components/sections/header';
 import Hero from '@/components/sections/hero';
 import Footer from '@/components/sections/footer';
+import { isMobileDevice, performanceConfig } from '@/lib/performance';
 
 // Lazy load components that are not immediately visible
 const About = lazy(() => import('@/components/sections/about'));
@@ -15,16 +16,22 @@ const Skills = lazy(() => import('@/components/sections/skills'));
 const Achievements = lazy(() => import('@/components/sections/achievements'));
 const Contact = lazy(() => import('@/components/sections/contact'));
 
-// Loading component
-const SectionSkeleton = () => (
-  <div className="w-full h-96 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 animate-pulse rounded-lg" />
-);
+// Loading component with reduced animation for mobile
+const SectionSkeleton = () => {
+  const isMobile = isMobileDevice();
+  
+  return (
+    <div className={`w-full h-96 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 rounded-lg ${
+      isMobile ? '' : 'animate-pulse'
+    }`} />
+  );
+};
 
 export default function OptimizedHome() {
+  const isMobile = isMobileDevice();
+  
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative">
-      {/* No global background - just floating icons in Hero section for performance */}
-      
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       {/* Main Content */}
       <div className="relative z-10">
         <Header />

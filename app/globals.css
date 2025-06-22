@@ -416,3 +416,155 @@ p {
   animation: matrix-rain 3s linear infinite;
   pointer-events: none;
 }
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  /* Disable expensive animations on mobile */
+  .animate-float,
+  .animate-glow,
+  .animate-pulse,
+  .neon-glow,
+  .holographic {
+    animation: none !important;
+  }
+  
+  /* Simplify gradients on mobile */
+  .gradient-text {
+    background: #8b5cf6;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Disable glass effects on mobile for better performance */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .dark .glass {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Simplified shadows on mobile */
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+  }
+  
+  /* Reduce transforms on mobile */
+  .transform-3d,
+  .card-3d {
+    transform: none !important;
+  }
+  
+  /* Hide decorative elements on mobile */
+  .cyber-grid::before,
+  .particle-trail::before {
+    display: none;
+  }
+}
+
+/* Mobile Navigation Improvements */
+@media (max-width: 1024px) {
+  /* Ensure touch targets are large enough */
+  .mobile-menu button,
+  .mobile-menu a {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Improve touch scrolling */
+  .mobile-menu {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  
+  /* Prevent text selection on navigation */
+  .mobile-menu-button,
+  .mobile-menu nav button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Fix for iOS Safari */
+  .mobile-menu {
+    position: fixed;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  
+  /* Improve button hover states on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .mobile-menu button:hover {
+      background-color: transparent;
+    }
+    
+    .mobile-menu button:active {
+      background-color: rgba(139, 92, 246, 0.1);
+    }
+  }
+}
+
+/* Fix viewport units on mobile */
+.mobile-menu {
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for better mobile support */
+}
+
+/* Improve accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu {
+    transition: none !important;
+  }
+  
+  .mobile-menu * {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Performance hint for images */
+img {
+  content-visibility: auto;
+}
+
+/* Optimize scrolling */
+* {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+}
+
+/* Tech icon styles */
+.tech-icon-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  aspect-ratio: 1 !important;
+}
+
+.tech-icon-container > * {
+  flex-shrink: 0;
+}
