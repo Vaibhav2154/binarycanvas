@@ -7,15 +7,43 @@ import Hero from '@/components/sections/hero';
 import Footer from '@/components/sections/footer';
 import { FloatingActionButton } from '@/components/ui/floating-action-button';
 import { isMobileDevice, performanceConfig } from '@/lib/performance';
+import ErrorBoundary from '@/components/error-boundary';
 
-// Lazy load components that are not immediately visible
-const About = lazy(() => import('@/components/sections/about'));
-const Education = lazy(() => import('@/components/sections/education'));
-const Experience = lazy(() => import('@/components/sections/experience'));
-const Projects = lazy(() => import('@/components/sections/projects'));
-const Skills = lazy(() => import('@/components/sections/skills'));
-const Achievements = lazy(() => import('@/components/sections/achievements'));
-const Contact = lazy(() => import('@/components/sections/contact'));
+// Lazy load components with error boundaries
+const About = lazy(() => import('@/components/sections/about').catch(err => {
+  console.error('Failed to load About component:', err);
+  return { default: () => <div>Failed to load section</div> };
+}));
+
+const Education = lazy(() => import('@/components/sections/education').catch(err => {
+  console.error('Failed to load Education component:', err);
+  return { default: () => <div>Failed to load section</div> };
+}));
+
+const Experience = lazy(() => import('@/components/sections/experience').catch(err => {
+  console.error('Failed to load Experience component:', err);
+  return { default: () => <div>Failed to load section</div> };
+}));
+
+const Projects = lazy(() => import('@/components/sections/projects').catch(err => {
+  console.error('Failed to load Projects component:', err);
+  return { default: () => <div>Failed to load section</div> };
+}));
+
+const Skills = lazy(() => import('@/components/sections/skills').catch(err => {
+  console.error('Failed to load Skills component:', err);
+  return { default: () => <div>Failed to load section</div> };
+}));
+
+const Achievements = lazy(() => import('@/components/sections/achievements').catch(err => {
+  console.error('Failed to load Achievements component:', err);
+  return { default: () => <div>Failed to load section</div> };
+}));
+
+const Contact = lazy(() => import('@/components/sections/contact').catch(err => {
+  console.error('Failed to load Contact component:', err);
+  return { default: () => <div>Failed to load section</div> };
+}));
 
 // Loading component with reduced animation for mobile
 const SectionSkeleton = () => {

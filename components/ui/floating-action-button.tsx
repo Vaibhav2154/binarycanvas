@@ -11,10 +11,14 @@ export function FloatingActionButton() {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      setIsVisible(window.pageYOffset > 300);
+      // Reduced from 300 to 100 for better visibility
+      setIsVisible(window.pageYOffset > 100);
     };
 
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    // Check immediately on mount
+    toggleVisibility();
+    
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
@@ -47,7 +51,7 @@ export function FloatingActionButton() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed bottom-6 right-6 z-50 flex flex-col items-end space-y-3"
+          className="fixed z-50 flex flex-col items-end space-y-3 bottom-6 right-6"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
@@ -91,7 +95,7 @@ export function FloatingActionButton() {
             whileTap={{ scale: 0.9 }}
           >
             <Button
-              className="w-14 h-14 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
+              className="transition-all duration-300 rounded-full shadow-lg w-14 h-14 bg-primary hover:bg-primary/90 text-primary-foreground hover:shadow-xl"
               onClick={isExpanded ? () => setIsExpanded(false) : scrollToTop}
               onMouseEnter={() => setIsExpanded(true)}
               onMouseLeave={() => setIsExpanded(false)}

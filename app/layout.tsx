@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
+import ErrorBoundary from '@/components/error-boundary';
 import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -70,45 +71,31 @@ export default function RootLayout({
         {/* Performance hints */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Touch icons */}
+          {/* Touch icons */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="manifest" href="/site.webmanifest" />
-         <Script
-          src="https://cloud.umami.is/script.js"
-          data-website-id="06e731ee-137f-4e26-b751-567b90262e82"
-          strategy="afterInteractive"
-        />
-        <Script id="matomo-init" strategy="beforeInteractive">
-        {`
-          var _paq = window._paq = window._paq || [];
-          _paq.push(['trackPageView']);
-          _paq.push(['enableLinkTracking']);
-          (function() {
-            var u="https://binaryanvasvercel.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u+'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.async=true; g.src='https://cdn.matomo.cloud/binaryanvasvercel.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-          })();
-        `}
-      </Script>
+        
+        {/* Preconnect to analytics domains for better performance */}
+        <link rel="preconnect" href="https://cloud.umami.is" />
+        <link rel="preconnect" href="https://binaryanvasvercel.matomo.cloud" />
       </head>
-       <Script id="matomo-init" strategy="beforeInteractive">
-        {`
-          var _paq = window._paq = window._paq || [];
-          _paq.push(['trackPageView']);
-          _paq.push(['enableLinkTracking']);
-          (function() {
-            var u="https://binaryanvasvercel.matomo.cloud/";
-            _paq.push(['setTrackerUrl', u+'matomo.php']);
-            _paq.push(['setSiteId', '1']);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.async=true; g.src='https://cdn.matomo.cloud/binaryanvasvercel.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
-          })();
-        `}
-      </Script>
+        <Script id="matomo-analytics" strategy="afterInteractive">
+          {`
+            var _paq = window._paq = window._paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+              var u="https://binaryanvasvercel.matomo.cloud/";
+              _paq.push(['setTrackerUrl', u+'matomo.php']);
+              _paq.push(['setSiteId', '1']);
+              var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+              g.async=true; g.src='https://cdn.matomo.cloud/binaryanvasvercel.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+            })();
+          `}        </Script>
       <body className={inter.className}>
+      
+        
+        {/* Matomo Analytics */}
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
