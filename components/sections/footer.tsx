@@ -33,29 +33,29 @@ const Footer = () => {
                 Computer Science Student • Flutter Developer • AI/ML Enthusiast
               </p>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex justify-center space-x-6 mb-8"
-            >
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  target={social.href.startsWith('mailto:') ? '_self' : '_blank'}
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </motion.a>
-              ))}
-            </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex justify-center space-x-4 mb-8"
+          >
+            {socialLinks.map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.href}
+                target={social.href.startsWith('mailto:') ? '_self' : '_blank'}
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 rounded-xl glass hover:glass-strong transition-all duration-300 group"
+                title={social.label}
+              >
+                <social.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              </motion.a>
+            ))}
+          </motion.div>
 
           {/* Footer Bottom */}
           <motion.div

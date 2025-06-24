@@ -9,7 +9,7 @@ import { Trophy, Award, Star, Target, Crown, Medal } from 'lucide-react';
 
 const Achievements = () => {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
     threshold: 0.1,
   });
 

@@ -11,7 +11,7 @@ import { ExternalLink, Github, Award, Shield, Smartphone, Brain, Heart } from 'l
 
 const Projects = () => {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
     threshold: 0.1,
   });
 

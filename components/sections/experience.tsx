@@ -9,7 +9,7 @@ import { Briefcase, Users, Trophy, Code, Calendar, MapPin } from 'lucide-react';
 
 const Experience = () => {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
     threshold: 0.1,
   });
 

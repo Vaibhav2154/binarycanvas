@@ -9,7 +9,7 @@ import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Download, ExternalLink 
 
 const Contact = () => {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
     threshold: 0.1,
   });
 

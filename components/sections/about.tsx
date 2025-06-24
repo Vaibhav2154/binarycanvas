@@ -9,7 +9,7 @@ import { Code, Shield, Smartphone, Brain, Sparkles, Zap, Target, Award } from 'l
 
 const About = () => {
   const [ref, inView] = useInView({
-    triggerOnce: true,
+    triggerOnce: false,
     threshold: 0.1,
   });
 
@@ -71,7 +71,7 @@ const About = () => {
 
   return (
     <section id="about" className="py-20 bg-gradient-to-br from-slate-50 via-violet-50/30 to-cyan-50/30 dark:from-slate-900 dark:via-purple-900/10 dark:to-slate-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container px-4 mx-auto sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           variants={containerVariants}
@@ -81,17 +81,17 @@ const About = () => {
         >
           <motion.div
             variants={itemVariants}
-            className="text-center mb-16"
+            className="mb-16 text-center"
           >
             <motion.div
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               className="inline-block mb-4"
             >
-              <Sparkles className="h-8 w-8 text-violet-500" />
+              <Sparkles className="w-8 h-8 text-violet-500" />
             </motion.div>
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6 gradient-text">About Me</h2>
-            <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
+            <h2 className="mb-6 text-4xl font-bold sm:text-5xl gradient-text">About Me</h2>
+            <p className="max-w-4xl mx-auto text-xl leading-relaxed text-muted-foreground">
               I'm a passionate Computer Science student at JSS Science and Technology University with a 
               strong focus on innovative technology solutions. My journey spans Flutter development, 
               cybersecurity, machine learning, and hackathon victories. I love building applications 
@@ -102,7 +102,7 @@ const About = () => {
           {/* Stats Section */}
           <motion.div
             variants={containerVariants}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+            className="grid grid-cols-2 gap-6 mb-16 md:grid-cols-4"
           >
             {stats.map((stat, index) => (
               <motion.div
@@ -111,13 +111,13 @@ const About = () => {
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="text-center"
               >
-                <Card className="glass border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Card className="transition-all duration-300 border-0 shadow-xl glass hover:shadow-2xl">
                   <CardContent className="p-6">
                     <div className={`w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-r ${highlights[index]?.color || 'from-violet-500 to-purple-600'} flex items-center justify-center`}>
-                      <stat.icon className="h-6 w-6 text-white" />
+                      <stat.icon className="w-6 h-6 text-white" />
                     </div>
                     <div className={`text-3xl font-bold mb-2 ${stat.color}`}>{stat.value}</div>
-                    <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+                    <div className="text-sm font-medium text-muted-foreground">{stat.label}</div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -127,7 +127,7 @@ const About = () => {
           {/* Highlights Grid */}
           <motion.div
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+            className="grid grid-cols-1 gap-6 mb-16 md:grid-cols-2 lg:grid-cols-4"
           >
             {highlights.map((item, index) => (
               <motion.div
@@ -136,13 +136,13 @@ const About = () => {
                 whileHover={{ scale: 1.05, y: -10 }}
                 className="group"
               >
-                <Card className="h-full glass border-0 shadow-xl hover:shadow-2xl transition-all duration-300 group-hover:shadow-violet-500/25">
+                <Card className="h-full transition-all duration-300 border-0 shadow-xl glass hover:shadow-2xl group-hover:shadow-violet-500/25">
                   <CardContent className="p-6 text-center">
                     <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${item.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                      <item.icon className="h-8 w-8 text-white" />
+                      <item.icon className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="font-bold text-lg mb-3">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                    <h3 className="mb-3 text-lg font-bold">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -155,20 +155,20 @@ const About = () => {
             whileHover={{ scale: 1.02 }}
             className="max-w-4xl mx-auto"
           >
-            <Card className="glass border-0 shadow-2xl">
+            <Card className="border-0 shadow-2xl glass">
               <CardContent className="p-8">
-                <h3 className="text-3xl font-bold mb-8 text-center gradient-text">Quick Facts</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <h3 className="mb-8 text-3xl font-bold text-center gradient-text">Quick Facts</h3>
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                   <motion.div
                     whileHover={{ x: 10 }}
                     className="space-y-4"
                   >
-                    <h4 className="font-bold text-xl text-violet-600 dark:text-violet-400">Education</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <h4 className="text-xl font-bold text-violet-600 dark:text-violet-400">Education</h4>
+                    <p className="leading-relaxed text-muted-foreground">
                       B.E. Computer Science<br />
                       JSS Science and Technology University
                     </p>
-                    <Badge className="bg-gradient-to-r from-violet-500 to-purple-600 text-white border-0">
+                    <Badge className="text-white border-0 bg-gradient-to-r from-violet-500 to-purple-600">
                       CGPA: 9.58
                     </Badge>
                   </motion.div>
@@ -176,7 +176,7 @@ const About = () => {
                     whileHover={{ x: 10 }}
                     className="space-y-4"
                   >
-                    <h4 className="font-bold text-xl text-cyan-600 dark:text-cyan-400">Specializations</h4>
+                    <h4 className="text-xl font-bold text-cyan-600 dark:text-cyan-400">Specializations</h4>
                     <div className="flex flex-wrap gap-2">
                       {["Flutter Development", "Machine Learning", "Cybersecurity", "Web Development"].map((skill, index) => (
                         <Badge key={index} variant="secondary" className="glass">
@@ -189,8 +189,8 @@ const About = () => {
                     whileHover={{ x: 10 }}
                     className="space-y-4"
                   >
-                    <h4 className="font-bold text-xl text-emerald-600 dark:text-emerald-400">Achievements</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <h4 className="text-xl font-bold text-emerald-600 dark:text-emerald-400">Achievements</h4>
+                    <p className="leading-relaxed text-muted-foreground">
                       10+ National Level Hackathon Finals<br />
                       Top 10 Campus Ambassador - Techfest'24 IIT Bombay
                     </p>
@@ -199,8 +199,8 @@ const About = () => {
                     whileHover={{ x: 10 }}
                     className="space-y-4"
                   >
-                    <h4 className="font-bold text-xl text-orange-600 dark:text-orange-400">Current Focus</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <h4 className="text-xl font-bold text-orange-600 dark:text-orange-400">Current Focus</h4>
+                    <p className="leading-relaxed text-muted-foreground">
                       Flutter App Development<br />
                       AI/ML Projects<br />
                       Open Source Contributions

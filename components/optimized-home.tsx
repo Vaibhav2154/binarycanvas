@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Header from '@/components/sections/header';
 import Hero from '@/components/sections/hero';
 import Footer from '@/components/sections/footer';
+import { FloatingActionButton } from '@/components/ui/floating-action-button';
 import { isMobileDevice, performanceConfig } from '@/lib/performance';
 
 // Lazy load components that are not immediately visible
@@ -85,6 +86,9 @@ export default function OptimizedHome() {
         </main>
         <Footer />
       </div>
+
+      {/* Floating Action Button */}
+      <FloatingActionButton />
     </div>
   );
 }
