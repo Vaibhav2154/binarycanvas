@@ -11,15 +11,18 @@ export function FloatingActionButton() {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      // Reduced from 300 to 100 for better visibility
-      setIsVisible(window.pageYOffset > 100);
+      setIsVisible(window.scrollY > 100);
     };
 
-    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    const handleScroll = () => {
+      toggleVisibility();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     // Check immediately on mount
     toggleVisibility();
     
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToTop = () => {
@@ -27,13 +30,17 @@ export function FloatingActionButton() {
       top: 0,
       behavior: 'smooth',
     });
+    setIsExpanded(false); // Close expanded state after scrolling
   };
 
   const fabActions = [
     {
       icon: Mail,
       label: 'Email',
-      action: () => window.open('mailto:vaibhavvaibhu2005@gmail.com'),
+      action: () => {
+        window.open('mailto:vaibhavvaibhu2005@gmail.com');
+        setIsExpanded(false);
+      },
       color: 'bg-blue-500 hover:bg-blue-600'
     },
     {
@@ -41,11 +48,42 @@ export function FloatingActionButton() {
       label: 'Chat',
       action: () => {
         const element = document.querySelector('#contact');
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+        setIsExpanded(false);
       },
       color: 'bg-green-500 hover:bg-green-600'
+    },
+    {
+      icon: Phone,
+      label: 'Call',
+      action: () => {
+        window.open('tel:+919900450852'); // Add your phone number
+        setIsExpanded(false);
+      },
+      color: 'bg-purple-500 hover:bg-purple-600'
     }
   ];
+
+  const handleMainButtonClick = () => {
+    if (isExpanded) {
+      setIsExpanded(false);
+    } else {
+      scrollToTop();
+    }
+  };
+
+  const handleMouseEnter = () => {
+    setIsExpanded(true);
+  };
+
+  const handleMouseLeave = () => {
+    // Add a small delay before closing to prevent accidental closing
+    setTimeout(() => {
+      setIsExpanded(false);
+    }, 200);
+  };
 
   return (
     <AnimatePresence>
@@ -55,25 +93,39 @@ export function FloatingActionButton() {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         >
           {/* Expanded Actions */}
           <AnimatePresence>
             {isExpanded && (
               <motion.div
                 className="flex flex-col space-y-2"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.2 }}
+                initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.8 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
               >
                 {fabActions.map((action, index) => (
                   <motion.div
                     key={action.label}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    transition={{ 
+                      delay: index * 0.05,
+                      duration: 0.2,
+                      ease: "easeOut"
+                    }}
+                    className="flex items-center space-x-2"
                   >
+                    <motion.span
+                      className="px-2 py-1 text-xs text-white rounded bg-black/80 whitespace-nowrap"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: (index * 0.05) + 0.1 }}
+                    >
+                      {action.label}
+                    </motion.span>
                     <Button
                       size="sm"
                       className={`${action.color} text-white shadow-lg hover:shadow-xl transition-all duration-200 rounded-full w-12 h-12 p-0`}
@@ -91,30 +143,37 @@ export function FloatingActionButton() {
           {/* Main FAB */}
           <motion.div
             className="relative"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <Button
-              className="transition-all duration-300 rounded-full shadow-lg w-14 h-14 bg-primary hover:bg-primary/90 text-primary-foreground hover:shadow-xl"
-              onClick={isExpanded ? () => setIsExpanded(false) : scrollToTop}
-              onMouseEnter={() => setIsExpanded(true)}
-              onMouseLeave={() => setIsExpanded(false)}
+              className="relative overflow-hidden transition-all duration-300 rounded-full shadow-lg w-14 h-14 bg-primary hover:bg-primary/90 text-primary-foreground hover:shadow-xl"
+              onClick={handleMainButtonClick}
+              title={isExpanded ? "Close menu" : "Scroll to top"}
             >
               <motion.div
                 animate={{ rotate: isExpanded ? 45 : 0 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
               >
                 <ArrowUp className="w-6 h-6" />
               </motion.div>
             </Button>
 
-            {/* Ripple effect */}
-            <motion.div
-              className="absolute inset-0 rounded-full bg-primary/20"
-              initial={{ scale: 0, opacity: 0.5 }}
-              animate={{ scale: [0, 2], opacity: [0.5, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
+            {/* Pulse effect when not expanded */}
+            {!isExpanded && (
+              <motion.div
+                className="absolute inset-0 rounded-full bg-primary/20"
+                initial={{ scale: 0, opacity: 0.8 }}
+                animate={{ scale: [0, 1.5, 2], opacity: [0.8, 0.3, 0] }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity,
+                  ease: "easeOut"
+                }}
+              />
+            )}
           </motion.div>
         </motion.div>
       )}

@@ -1,230 +1,217 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail, Download, Sparkles, Code, Rocket } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import FloatingTechIcons from '@/components/three/floating-tech-icons';
+import { useAudio } from '@/components/audio-context';
 
-const Hero = () => {
-  const [isClient, setIsClient] = useState(false);
+const HeroInnovative = () => {
+  const [currentScene, setCurrentScene] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const { isMuted, toggleMute, setUserInteracted, userInteracted } = useAudio();
+
+  const scenes = [
+    {
+      title: "Hello, I'm Vaibhav",
+      subtitle: "Full Stack Developer",
+      description: "Crafting digital experiences that matter",
+      // Light mode: purple to blue gradient, Dark mode: deeper purple to blue
+      background: "from-purple-600 via-blue-600 to-indigo-600 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-900",
+      particles: "tech"
+    },
+    {
+      title: "I Build Solutions",
+      subtitle: "Problem Solver",
+      description: "Turning complex challenges into elegant code",
+      // Light mode: emerald to cyan gradient, Dark mode: deeper emerald to cyan
+      background: "from-emerald-600 via-teal-600 to-cyan-600 dark:from-emerald-900 dark:via-teal-900 dark:to-cyan-900",
+      particles: "code"
+    },
+    {
+      title: "Let's Create Together",
+      subtitle: "Innovator",
+      description: "Ready to bring your ideas to life",
+      // Light mode: orange to pink gradient, Dark mode: deeper orange to pink
+      background: "from-orange-600 via-red-600 to-pink-600 dark:from-orange-900 dark:via-red-900 dark:to-pink-900",
+      particles: "creative"
+    }
+  ];
 
   useEffect(() => {
-    setIsClient(true);
+    setMounted(true);
   }, []);
 
-  const scrollToAbout = () => {
-    const element = document.querySelector('#about');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  useEffect(() => {
+    if (!isPlaying) return;
+    
+    const timer = setInterval(() => {
+      setCurrentScene((prev) => (prev + 1) % scenes.length);
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [isPlaying, scenes.length]);
+
+  const handleUserInteraction = () => {
+    if (!userInteracted) {
+      setUserInteracted(true);
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
-      }
-    }
+  const handleToggleSound = () => {
+    toggleMute();
   };
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
-  };
-
-  const floatingVariants = {
-    float: {
-      y: [0, -15, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
+  const scrollToNext = () => {
+    const nextSection = document.querySelector('#about');
+    nextSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="hero" className="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-background via-accent/30 to-background">
-     
-      {/* Decorative Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute rounded-full top-1/4 -left-20 w-96 h-96 bg-primary/5 blur-3xl animate-pulse-soft" />
-        <div className="absolute rounded-full bottom-1/4 -right-20 w-96 h-96 bg-primary/5 blur-3xl animate-pulse-soft" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/3 to-primary/3 rounded-full blur-3xl animate-float" />
-      </div>
-      
-      {/* Floating Tech Icons - positioned to the right side on laptops only */}
-      <div className="absolute top-0 right-0 hidden w-4/5 bottom-20 lg:block">
-        {isClient && <FloatingTechIcons />}
-      </div>
+    <section id="hero" className="relative flex items-center justify-center min-h-screen overflow-hidden bg-background">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentScene}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5 }}
+          className={`absolute inset-0 bg-gradient-to-br ${scenes[currentScene].background}`}
+        />
+      </AnimatePresence>
 
-      <div className="container relative z-10 px-4 mx-auto sm:px-6 lg:px-8">
-        <div className="grid items-center min-h-screen grid-cols-1 gap-12 lg:grid-cols-2">
-          {/* Left Column - Content */}
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+
+      {mounted && (
+        <div className="absolute inset-0">
+          {Array.from({ length: 50 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-white/20 dark:bg-white/30"
+              animate={{
+                x: [0, Math.random() * window.innerWidth],
+                y: [0, Math.random() * window.innerHeight],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 5,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+              }}
+              style={{
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="relative z-10 max-w-4xl px-4 mx-auto text-center text-white dark:text-white">
+        <AnimatePresence mode="wait">
           <motion.div
-            className="lg:pr-12"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+            key={currentScene}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.8 }}
+            onClick={handleUserInteraction}
           >
-          {/* Badge */}
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center px-4 py-2 mb-6 space-x-2 rounded-full glass"
-          >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-muted-foreground">
-              Full Stack Developer
-            </span>
-          </motion.div>
-
-          {/* Main Heading */}
-          <motion.h1
-            variants={itemVariants}
-            className="mb-6 text-4xl font-bold sm:text-5xl lg:text-6xl text-foreground"
-          >
-            Hi, I'm{' '}
-            <span className="text-transparent bg-gradient-to-r from-primary to-primary/60 bg-clip-text">
-              {/* {"Vaibhav M N".split("").map((letter, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ 
-                    opacity: [0, 1, 1, 0], 
-                    y: [20, 0, 0, 20] 
-                  }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.1,
-                    ease: [0.6, -0.05, 0.01, 0.99],
-                    repeat: Infinity,
-                    repeatDelay: 3,
-                    repeatType: "loop"
-                  }}
-                  className={letter === " " ? "inline-block w-2" : "inline-block"}
-                >
-                  {letter === " " ? "\u00A0" : letter}
-                </motion.span>
-              ))} */}
-              Vaibhav M N
-            </span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            variants={itemVariants}
-            className="mb-6 text-xl leading-relaxed sm:text-2xl text-muted-foreground"
-          >
-            I create{' '}
-            <span className="font-medium text-primary">innovative</span> and{' '}
-            <span className="font-medium text-primary">scalable</span> web applications 
-            that deliver exceptional user experiences
-          </motion.p>
-
-          {/* Description */}
-          <motion.p
-            variants={itemVariants}
-            className="mb-8 text-lg text-muted-foreground"
-          >
-            Passionate about modern technologies, clean code, and turning ideas into 
-            beautiful, functional digital solutions.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col items-start justify-start gap-4 mb-8 sm:flex-row lg:justify-start"
-          >
-            <Button
-              size="lg"
-              className="px-8 py-6 text-lg font-medium transition-all duration-300 group rounded-2xl shadow-interactive hover:shadow-interactive-hover"
-              onClick={scrollToAbout}
+            <motion.h1 
+              className="mb-4 text-6xl font-bold text-white md:text-8xl drop-shadow-lg"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 1, ease: "easeOut" }}
             >
-              <span>View My Work</span>
-              <ArrowDown className="w-5 h-5 ml-2 transition-transform group-hover:translate-y-1" />
-            </Button>
+              {scenes[currentScene].title}
+            </motion.h1>
             
-            <Button
-              variant="outline"
-              size="lg"
-              className="px-8 py-6 text-lg font-medium transition-all duration-300 group rounded-2xl glass border-primary/20 hover:bg-primary/5"
-              asChild
+            <motion.p 
+              className="mb-6 text-2xl md:text-3xl text-white/90 drop-shadow-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
             >
-              <a
-                href="/resume.pdf"
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Download className="w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
-                <span>Download Resume</span>
-              </a>
-            </Button>
+              {scenes[currentScene].subtitle}
+            </motion.p>
+            
+            <motion.p 
+              className="mb-8 text-lg md:text-xl text-white/80 drop-shadow-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              {scenes[currentScene].description}
+            </motion.p>
           </motion.div>
+        </AnimatePresence>
 
-          {/* Social Links */}
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center justify-start space-x-6"
+        <motion.div 
+          className="flex items-center justify-center mb-12 space-x-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="text-white bg-white/10 border-white/30 hover:bg-white/20 dark:bg-white/5 dark:border-white/20 dark:hover:bg-white/15 backdrop-blur-sm"
           >
-            {[
-              { icon: Github, href: "https://github.com/Vaibhav2154", label: "GitHub" },
-              { icon: Linkedin, href: "https://www.linkedin.com/in/vaibhav-m-n-a6b071282/", label: "LinkedIn" },
-              { icon: Mail, href: "mailto:vaibhavvaibhu2005@gmail.com", label: "Email" }
-            ].map((social, index) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                target={social.href.startsWith('mailto:') ? '_self' : '_blank'}
-                rel="noopener noreferrer"
-                className="p-3 transition-all duration-300 group rounded-xl glass hover:glass-strong"
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                title={social.label}
-              >
-                <social.icon className="w-6 h-6 transition-colors text-muted-foreground group-hover:text-primary" />
-              </motion.a>
+            {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+          </Button>
+          
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleToggleSound}
+            className="text-white bg-white/10 border-white/30 hover:bg-white/20 dark:bg-white/5 dark:border-white/20 dark:hover:bg-white/15 backdrop-blur-sm"
+          >
+            {!isMuted ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+          </Button>
+
+          <div className="flex space-x-2">
+            {scenes.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentScene(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentScene 
+                    ? 'bg-white shadow-lg' 
+                    : 'bg-white/40 hover:bg-white/60'
+                }`}
+              />
             ))}
-          </motion.div>
+          </div>
         </motion.div>
 
-        {/* Right Column - Space for Tech Icons (visible only on lg+ screens) */}
-        <div className="hidden lg:block">
-          {/* This space is reserved for the floating tech icons */}
-        </div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2 }}
+        >
+          <Button
+            size="lg"
+            onClick={scrollToNext}
+            className="px-8 py-4 text-lg text-gray-900 bg-white rounded-full shadow-xl hover:bg-white/90 dark:text-gray-900 dark:bg-white/95 dark:hover:bg-white"
+          >
+            Begin Journey
+          </Button>
+        </motion.div>
       </div>
 
       {/* Scroll Indicator */}
       <motion.div
         className="absolute transform -translate-x-1/2 bottom-8 left-1/2"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
       >
-        <motion.button
-          onClick={scrollToAbout}
-          className="flex flex-col items-center space-y-2 transition-colors text-muted-foreground hover:text-primary group"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <span className="text-sm font-medium">Scroll to explore</span>
-          <ArrowDown className="w-5 h-5 transition-transform group-hover:scale-110" />
-        </motion.button>
+        <ChevronDown className="w-8 h-8 text-white/70 drop-shadow-md" />
       </motion.div>
     </section>
   );
 };
 
-export default Hero;
+export default HeroInnovative;

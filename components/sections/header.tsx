@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ThemeToggle from '@/components/theme-toggle';
+import Image from 'next/image';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,7 +44,6 @@ const Header = () => {
           const scrollY = window.scrollY;
           setIsScrolled(scrollY > 50);
           
-          // Update active section based on scroll position (only when not manually scrolling)
           if (!isScrollingToSection) {
             const sections = navItems.map(item => item.href.substring(1));
             const scrollPosition = scrollY + 120; // Increased offset for better UX
@@ -64,7 +64,7 @@ const Header = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+    handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, [navItems, mounted, isScrollingToSection]);  const scrollToSection = useCallback((href: string) => {
@@ -73,7 +73,7 @@ const Header = () => {
     setIsScrollingToSection(true);
     const element = document.querySelector(href);
     if (element) {
-      const headerOffset = 90; // Slightly increased for better visual spacing
+      const headerOffset = 90; 
       const elementPosition = (element as HTMLElement).offsetTop;
       const offsetPosition = elementPosition - headerOffset;
 
@@ -203,7 +203,6 @@ const Header = () => {
     };
   }, [mounted, isMobileMenuOpen, activeSection, navItems, scrollToSection]);  return (
     <>
-      {/* Loading skeleton for SSR */}
       {!mounted && (
         <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md">
           <div className="container px-4 mx-auto sm:px-6 lg:px-8">
@@ -235,8 +234,8 @@ const Header = () => {
         }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           mounted ? (isScrolled
-            ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg border-b border-gray-200/20 dark:border-gray-800/20'
-            : 'bg-transparent') : 'opacity-0 pointer-events-none'
+            ? 'bg-white/20 dark:bg-black/20 backdrop-blur-md border-b border-white/10 dark:border-gray-800/20'
+            : 'bg-white/10 dark:bg-black/10 backdrop-blur-sm') : 'opacity-0 pointer-events-none'
         }`}
         suppressHydrationWarning
         role="banner"
@@ -250,14 +249,10 @@ const Header = () => {
               onClick={() => scrollToSection('#hero')}
               suppressHydrationWarning
             >
-              <div className="flex items-center justify-center w-10 h-10 transition-shadow duration-200 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 group-hover:shadow-lg">
-                <span className="text-lg font-bold text-white">V</span>
-              </div>
-              <span className="hidden text-xl font-bold text-gray-900 transition-colors duration-200 dark:text-white sm:block group-hover:text-violet-600 dark:group-hover:text-violet-400">
-                Vaibhav M N
-              </span>
-            </motion.div>            {/* Desktop Navigation */}
-            <nav className="items-center hidden space-x-1 lg:flex" role="navigation" aria-label="Main navigation">
+            <Image alt='logo' src={"/logo.png"} width={40} height={40} className="ml-10" />
+            
+            </motion.div>
+            <nav className="items-center hidden ml-10 space-x-1 lg:flex" role="navigation" aria-label="Main navigation">
               {navItems.map((item) => (
                 <motion.button
                   key={item.name}

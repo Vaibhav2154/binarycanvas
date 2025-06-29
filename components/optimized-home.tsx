@@ -1,13 +1,10 @@
 "use client";
 
 import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 import Header from '@/components/sections/header';
 import Hero from '@/components/sections/hero';
 import Footer from '@/components/sections/footer';
-import { FloatingActionButton } from '@/components/ui/floating-action-button';
-import { isMobileDevice, performanceConfig } from '@/lib/performance';
-import ErrorBoundary from '@/components/error-boundary';
+import { isMobileDevice } from '@/lib/performance';
 
 // Lazy load components with error boundaries
 const About = lazy(() => import('@/components/sections/about').catch(err => {
@@ -82,7 +79,6 @@ export default function OptimizedHome() {
         <main className="relative pt-16">
           {/* Hero section loads immediately */}
           <Hero />
-          
           {/* Lazy load sections with suspense */}
           <Suspense fallback={<SectionSkeleton />}>
             <About />
@@ -114,9 +110,6 @@ export default function OptimizedHome() {
         </main>
         <Footer />
       </div>
-
-      {/* Floating Action Button */}
-      <FloatingActionButton />
     </div>
   );
 }

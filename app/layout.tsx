@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { AudioProvider } from '@/components/audio-context';
 import { Toaster } from '@/components/ui/sonner';
-import ErrorBoundary from '@/components/error-boundary';
 import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://vaibhav-portfolio.vercel.app',
+    url: 'https://binaryanvas.vercel.app',
     title: 'Vaibhav M N - Full Stack Developer',
     description: 'Computer Science student and Full Stack Developer specializing in Flutter, Next.js, and AI/ML.',
     siteName: 'Vaibhav M N Portfolio',
@@ -59,7 +59,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Mobile-specific meta tags */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -72,10 +71,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           {/* Touch icons */}
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/logo.png" />
         <link rel="manifest" href="/site.webmanifest" />
         
-        {/* Preconnect to analytics domains for better performance */}
         <link rel="preconnect" href="https://cloud.umami.is" />
         <link rel="preconnect" href="https://binaryanvasvercel.matomo.cloud" />
       </head>
@@ -102,7 +100,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <AudioProvider>
+            {children}
+          </AudioProvider>
           <Toaster />
         </ThemeProvider>
       </body>
