@@ -10,6 +10,7 @@ const HeroInnovative = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const scenes = [
     {
@@ -34,6 +35,10 @@ const HeroInnovative = () => {
       particles: "creative"
     }
   ];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -72,28 +77,30 @@ const HeroInnovative = () => {
       </AnimatePresence>
 
       {/* Animated Particles */}
-      <div className="absolute inset-0">
-        {Array.from({ length: 50 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
-            animate={{
-              x: [0, Math.random() * window.innerWidth],
-              y: [0, Math.random() * window.innerHeight],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 5,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-            }}
-            style={{
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-            }}
-          />
-        ))}
-      </div>
+      {mounted && (
+        <div className="absolute inset-0">
+          {Array.from({ length: 50 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-white/20 rounded-full"
+              animate={{
+                x: [0, Math.random() * window.innerWidth],
+                y: [0, Math.random() * window.innerHeight],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 5,
+                repeat: Infinity,
+                delay: Math.random() * 5,
+              }}
+              style={{
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
