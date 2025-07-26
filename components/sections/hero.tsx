@@ -58,7 +58,7 @@ const HeroInnovative = () => {
 
   useEffect(() => {
     if (!isPlaying) return;
-    
+
     const timer = setInterval(() => {
       setCurrentScene((prev) => (prev + 1) % scenes.length);
     }, 4000);
@@ -159,7 +159,7 @@ const HeroInnovative = () => {
             </motion.p>
           </motion.div>
         </AnimatePresence> */}
-        <motion.div 
+        <motion.div
           className="flex flex-col md:flex-row items-stretch justify-center w-full mb-2 md:mb-12 gap-6 md:gap-12 min-h-[350px] md:min-h-[500px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -176,7 +176,7 @@ const HeroInnovative = () => {
               onClick={handleUserInteraction}
               className="flex flex-col justify-center w-full h-full"
             >
-              <motion.h1 
+              <motion.h1
                 className="mb-4 text-6xl font-bold text-white md:text-8xl drop-shadow-lg"
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
@@ -184,7 +184,7 @@ const HeroInnovative = () => {
               >
                 {scenes[currentScene].title}
               </motion.h1>
-              <motion.p 
+              <motion.p
                 className="mb-6 text-2xl md:text-3xl text-white/90 drop-shadow-md"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -192,7 +192,7 @@ const HeroInnovative = () => {
               >
                 {scenes[currentScene].subtitle}
               </motion.p>
-              <motion.p 
+              <motion.p
                 className="mb-8 text-lg md:text-xl text-white/80 drop-shadow-md"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -235,11 +235,10 @@ const HeroInnovative = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentScene(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentScene 
-                      ? 'bg-white shadow-lg' 
+                  className={`w-2 h-2 rounded-full transition-all ${index === currentScene
+                      ? 'bg-white shadow-lg'
                       : 'bg-white/40 hover:bg-white/60'
-                  }`}
+                    }`}
                 />
               ))}
             </div>
