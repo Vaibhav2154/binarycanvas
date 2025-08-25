@@ -121,7 +121,7 @@ const HeroInnovative = () => {
           ))}
         </div>
       )}
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full max-w-6xl px-4 mx-auto text-white dark:text-white">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4 mx-auto text-white max-w-7xl dark:text-white">
         {/* <AnimatePresence mode="wait">
           <motion.div
             key={currentScene}
@@ -160,24 +160,33 @@ const HeroInnovative = () => {
           </motion.div>
         </AnimatePresence> */}
         <motion.div
-          className="flex flex-col md:flex-row items-stretch justify-center w-full mb-2 md:mb-12 gap-6 md:gap-12 min-h-[350px] md:min-h-[500px]"
+          className="flex flex-col items-center justify-center w-full h-full max-w-6xl gap-8 mx-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
         >
-          {/* Hero Intro */}
-          <div className="flex-1 min-w-[250px] max-w-xl flex flex-col justify-center items-center md:items-start text-center md:text-left">
+          {/* Hero 3D Experience - Centered with landscape ratio */}
+          {!isMobile && (
+            <div className="flex items-center justify-center w-full mb-8">
+              <div className="flex items-center justify-center w-full max-w-3xl aspect-video">
+                <HeroExperience />
+              </div>
+            </div>
+          )}
+          
+          {/* Hero Intro - Below the model with reduced height */}
+          <div className="flex flex-col items-center justify-center w-full max-w-4xl mt-4 text-center">
             <motion.div
               key={currentScene}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
+              exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.8 }}
               onClick={handleUserInteraction}
-              className="flex flex-col justify-center w-full h-full"
+              className="flex flex-col justify-center w-full"
             >
               <motion.h1
-                className="mb-4 text-6xl font-bold text-white md:text-8xl drop-shadow-lg"
+                className="mb-2 text-3xl font-bold text-white md:text-5xl lg:text-6xl drop-shadow-lg"
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 1, ease: 'easeOut' }}
@@ -185,7 +194,7 @@ const HeroInnovative = () => {
                 {scenes[currentScene].title}
               </motion.h1>
               <motion.p
-                className="mb-6 text-2xl md:text-3xl text-white/90 drop-shadow-md"
+                className="mb-2 text-lg md:text-xl lg:text-2xl text-white/90 drop-shadow-md"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
@@ -193,7 +202,7 @@ const HeroInnovative = () => {
                 {scenes[currentScene].subtitle}
               </motion.p>
               <motion.p
-                className="mb-8 text-lg md:text-xl text-white/80 drop-shadow-md"
+                className="mb-3 text-sm md:text-base lg:text-lg text-white/80 drop-shadow-md"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
@@ -202,18 +211,10 @@ const HeroInnovative = () => {
               </motion.p>
             </motion.div>
           </div>
-          {/* Hero 3D Experience (hidden on mobile) */}
-          {!isMobile && (
-            <div className="flex-1 min-w-[300px] max-w-3xl flex items-center justify-center">
-              <div className="hero-3d-layout w-full h-[140px] xs:h-[180px] sm:h-[220px] md:h-[550px] max-w-[550px] max-h-[550px] md:max-w-[650px] md:max-h-[650px] flex items-center justify-center">
-                <HeroExperience />
-              </div>
-            </div>
-          )}
         </motion.div>
         {/* Controls and Begin Journey stacked on mobile, with extra margin, z-index, and background for clarity */}
-        <div className="relative z-20 flex flex-col items-center justify-center w-full gap-4 px-2 pt-4 pb-4 mt-8 shadow-lg md:flex-row md:mt-6 sm:px-0 bg-black/30 md:bg-transparent rounded-xl md:rounded-none md:shadow-none backdrop-blur md:backdrop-blur-none">
-          <div className="flex flex-row items-center justify-center w-full gap-4 mb-4 md:mb-0">
+        <div className="relative z-20 flex flex-col items-center justify-center w-full gap-3 px-2 pt-2 pb-2 mt-2 shadow-lg md:flex-row md:mt-2 sm:px-0 bg-black/30 md:bg-transparent rounded-xl md:rounded-none md:shadow-none backdrop-blur md:backdrop-blur-none">
+          <div className="flex flex-row items-center justify-center w-full gap-3 mb-1 md:mb-0">
             <Button
               variant="outline"
               size="sm"

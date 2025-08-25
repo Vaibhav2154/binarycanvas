@@ -1,0 +1,137 @@
+/* Hero 3D Model Frame Animations */
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.6), 0 0 40px rgba(34, 211, 238, 0.3);
+  }
+}
+
+@keyframes corner-flash {
+  0%, 90%, 100% {
+    opacity: 0.6;
+  }
+  95% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.8);
+  }
+}
+
+@keyframes status-blink {
+  0%, 50% {
+    opacity: 0.7;
+  }
+  51%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 5px rgba(34, 211, 238, 0.8);
+  }
+}
+
+@keyframes frame-startup {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-frame {
+  animation: pulse-glow 3s ease-in-out infinite, frame-startup 1s ease-out;
+}
+
+.hero-frame-corner {
+  animation: corner-flash 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.hero-frame-scan {
+  animation: scan-line 6s linear infinite;
+}
+
+.hero-frame-status {
+  animation: status-blink 1.5s ease-in-out infinite;
+}
+
+.hero-frame-active {
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.5), 0 0 35px rgba(34, 211, 238, 0.3), inset 0 0 15px rgba(34, 211, 238, 0.1) !important;
+  border-color: rgb(34, 211, 238) !important;
+}
+
+.hero-frame-active .hero-frame-corner {
+  border-color: rgb(34, 211, 238) !important;
+  animation: corner-flash 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.8));
+}
+
+/* Frame backdrop effect */
+.hero-frame-backdrop {
+  background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.05) 0%, transparent 70%);
+  backdrop-filter: blur(1px);
+}
+
+.hero-frame-active .hero-frame-backdrop {
+  background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.1) 0%, transparent 70%);
+  backdrop-filter: blur(2px);
+}
+
+/* Grid overlay for high-tech feel */
+.hero-frame-grid {
+  background-image: 
+    linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+.hero-frame-active .hero-frame-grid {
+  opacity: 0.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-frame {
+    animation: frame-startup 1s ease-out; /* Keep startup animation but remove pulse on mobile */
+  }
+  
+  .hero-frame-corner {
+    animation: none;
+  }
+  
+  .hero-frame-scan {
+    animation: none;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .hero-frame-backdrop {
+    background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.08) 0%, transparent 70%);
+  }
+  
+  .hero-frame-active .hero-frame-backdrop {
+    background: radial-gradient(ellipse at center, rgba(34, 211, 238, 0.15) 0%, transparent 70%);
+  }
+}
