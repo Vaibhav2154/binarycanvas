@@ -234,8 +234,8 @@ const Header = () => {
         }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           mounted ? (isScrolled
-            ? 'bg-white/20 dark:bg-black/20 backdrop-blur-md border-b border-white/10 dark:border-gray-800/20'
-            : 'bg-white/10 dark:bg-black/10 backdrop-blur-sm') : 'opacity-0 pointer-events-none'
+            ? 'bg-black/95 backdrop-blur-md border-b-2 border-neon-pink shadow-cyber'
+            : 'bg-black/60 backdrop-blur-sm border-b border-neon-pink/30 shadow-neon') : 'opacity-0 pointer-events-none'
         }`}
         suppressHydrationWarning
         role="banner"
@@ -259,10 +259,10 @@ const Header = () => {
                   onClick={() => scrollToSection(item.href)}
                   whileHover={mounted ? { scale: 1.05, y: -1 } : {}}
                   whileTap={mounted ? { scale: 0.95 } : {}}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative overflow-hidden ${
+                  className={`px-4 py-2 rounded text-sm font-medium transition-all duration-200 relative overflow-hidden font-cyber ${
                     activeSection === item.href.substring(1)
-                      ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/25'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:shadow-md'
+                      ? 'bg-neon-pink text-black shadow-lg shadow-neon-strong animate-neon-glow'
+                      : 'text-neon-pink hover:text-white hover:bg-neon-pink/20 hover:shadow-neon'
                   }`}
                   suppressHydrationWarning
                   aria-label={`Navigate to ${item.name} section`}
@@ -272,7 +272,7 @@ const Header = () => {
                   {activeSection === item.href.substring(1) && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute inset-0 rounded-lg bg-violet-600"
+                      className="absolute inset-0 rounded bg-neon-pink"
                       initial={false}
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
@@ -294,7 +294,7 @@ const Header = () => {
                     initial={mounted ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                     animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
                     transition={mounted ? { delay: index * 0.1 } : {}}
-                    className="p-2 text-gray-700 transition-all duration-200 rounded-lg dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
+                    className="p-2 text-neon-cyan transition-all duration-200 rounded-lg hover:text-white hover:bg-neon-cyan/20 hover:shadow-neon focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-opacity-50"
                     title={social.label}
                     suppressHydrationWarning
                     aria-label={`Visit ${social.label} profile`}
@@ -305,7 +305,7 @@ const Header = () => {
               </div>
 
               {/* Theme Toggle */}
-              <div className="pl-2 border-l border-gray-200 dark:border-gray-700">
+              <div className="pl-2 border-l border-neon-cyan/20">
                 <ThemeToggle />
               </div>
             </div>
@@ -318,7 +318,7 @@ const Header = () => {
                 onClick={toggleMobileMenu}
                 whileHover={mounted ? { scale: 1.1 } : {}}
                 whileTap={mounted ? { scale: 0.9 } : {}}
-                className="p-2 text-gray-700 transition-all duration-200 rounded-lg mobile-menu-button dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
+                className="p-2 text-neon-cyan transition-all duration-200 rounded-lg mobile-menu-button hover:text-white hover:bg-neon-cyan/20 focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-opacity-50"
                 aria-label="Toggle mobile menu"
                 aria-expanded={isMobileMenuOpen}
                 suppressHydrationWarning
@@ -375,14 +375,14 @@ const Header = () => {
                 stiffness: 200,
                 mass: 0.8
               }}
-              className="mobile-menu fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-white dark:bg-black shadow-2xl z-50 lg:hidden overflow-y-auto border-l border-gray-200 dark:border-gray-800"
+              className="mobile-menu fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-black shadow-2xl z-50 lg:hidden overflow-y-auto border-l border-neon-pink"
               role="dialog"
               aria-modal="true"
               aria-labelledby="mobile-menu-title"
             >
               <div className="flex flex-col h-full">
                 {/* Mobile Menu Header */}
-                <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
+                <div className="flex items-center justify-between p-6 border-b border-neon-pink">
                   <motion.div 
                     className="flex items-center space-x-2"
                     initial={mounted ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
@@ -390,14 +390,14 @@ const Header = () => {
                     transition={{ delay: mounted ? 0.2 : 0 }}
                     id="mobile-menu-title"
                   >
-                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600">
-                      <span className="text-sm font-bold text-white">V</span>
-                    </div>                    <span className="text-lg font-bold text-gray-900 dark:text-white">
+                    <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-neon-pink to-neon-purple">
+                      <span className="text-sm font-bold text-black font-cyber">V</span>
+                    </div>                    <span className="text-lg font-bold text-white font-cyber">
                       Vaibhav M N
                     </span>
                   </motion.div>                  <motion.button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 text-gray-500 transition-all duration-200 rounded-lg hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
+                    className="p-2 text-neon-cyan transition-all duration-200 rounded-lg hover:text-white hover:bg-neon-cyan/20 focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-opacity-50"
                     aria-label="Close mobile menu"
                     whileHover={mounted ? { scale: 1.1, rotate: 90 } : {}}
                     whileTap={mounted ? { scale: 0.9 } : {}}
@@ -416,22 +416,22 @@ const Header = () => {
                         initial={mounted ? { opacity: 0, x: 20 } : { opacity: 1, x: 0 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: mounted ? index * 0.1 : 0 }}
-                        className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 relative overflow-hidden group ${
+                        className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 relative overflow-hidden group font-cyber ${
                           activeSection === item.href.substring(1)
-                            ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/25'
-                            : 'text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:shadow-md'
+                            ? 'bg-neon-pink text-black shadow-lg shadow-neon-strong animate-neon-glow'
+                            : 'text-neon-cyan hover:text-white hover:bg-neon-pink/20 hover:shadow-neon'
                         }`}
                         aria-label={`Navigate to ${item.name} section`}
                       >
                         <span className="relative z-10">{item.name}</span>
                         {activeSection !== item.href.substring(1) && (
-                          <div className="absolute inset-0 transition-transform duration-300 translate-x-full bg-gradient-to-r from-violet-600/10 to-purple-600/10 group-hover:translate-x-0" />
+                          <div className="absolute inset-0 transition-transform duration-300 translate-x-full bg-gradient-to-r from-neon-pink/10 to-neon-purple/10 group-hover:translate-x-0" />
                         )}
                       </motion.button>
                     ))}
                   </nav>
                 </div>                {/* Mobile Social Links */}
-                <div className="px-6 py-6 border-t border-gray-200 dark:border-gray-800">
+                <div className="px-6 py-6 border-t border-neon-pink">
                   <div className="flex items-center justify-center space-x-6">
                     {socialLinks.map((social, index) => (
                       <motion.a
@@ -444,7 +444,7 @@ const Header = () => {
                         initial={mounted ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}
                         animate={mounted ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
                         transition={mounted ? { delay: 0.3 + index * 0.1 } : {}}
-                        className="p-3 text-gray-700 transition-all duration-200 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-opacity-50"
+                        className="p-3 text-neon-cyan transition-all duration-200 bg-neon-pink/10 rounded-full hover:text-white hover:bg-neon-pink/20 hover:shadow-neon focus:outline-none focus:ring-2 focus:ring-neon-pink focus:ring-opacity-50"
                         title={social.label}
                         suppressHydrationWarning
                         aria-label={`Visit ${social.label} profile`}

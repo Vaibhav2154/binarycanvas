@@ -27,12 +27,28 @@ const FooterModern = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden text-white bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
+    <footer className="relative overflow-hidden text-white bg-gradient-to-br from-black via-purple-900/30 to-black">
+      {/* Cyber Grid Background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="grid-bg w-full h-full" />
+        {Array.from({ length: 50 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-neon-pink"
+            animate={{
+              opacity: [0.1, 0.4, 0.1],
+            }}
+            transition={{
+              duration: Math.random() * 2 + 1,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+            style={{
+              left: Math.random() * 100 + '%',
+              top: Math.random() * 100 + '%',
+            }}
+          />
+        ))}
       </div>
 
       <div className="container relative z-10 px-4 py-16 mx-auto sm:px-6 lg:px-8">
@@ -47,23 +63,23 @@ const FooterModern = () => {
               className="lg:col-span-2"
             >
               <div className="flex items-center mb-4 space-x-3">
-                <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500">
-                  <Code className="w-6 h-6 text-white" />
+                <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r from-neon-pink to-neon-purple">
+                  <Code className="w-6 h-6 text-black animate-neon-glow" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">
-                    Vaibhav M N
+                  <h3 className="text-2xl font-bold text-transparent bg-gradient-to-r from-neon-pink to-neon-cyan bg-clip-text font-cyber">
+                    VAIBHAV M N
                   </h3>
-                  <p className="text-sm text-gray-300">Full Stack Developer</p>
+                  <p className="text-sm text-neon-cyan font-mono">Cyber Developer</p>
                 </div>
               </div>
-              <p className="max-w-md mb-6 leading-relaxed text-gray-300">
-                Passionate about creating innovative solutions that make a difference. 
-                Always learning, always building, always pushing the boundaries of what's possible.
+              <p className="max-w-md mb-6 leading-relaxed text-neon-cyan/80 font-mono">
+                Passionate about creating innovative cyber solutions that make a difference. 
+                Always processing, always building, always pushing the boundaries of what's possible.
               </p>
-              <div className="flex items-center space-x-2 text-sm text-gray-400">
-                <Coffee className="w-4 h-4" />
-                <span>Fueled by coffee and curiosity</span>
+              <div className="flex items-center space-x-2 text-sm text-neon-pink/70 font-cyber">
+                <Coffee className="w-4 h-4 animate-neon-glow" />
+                <span>Fueled by coffee and cyber curiosity</span>
               </div>
             </motion.div>
 
@@ -73,13 +89,13 @@ const FooterModern = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h4 className="mb-4 text-lg font-semibold">Quick Links</h4>
+              <h4 className="mb-4 text-lg font-semibold text-neon-pink font-cyber">QUICK_LINKS</h4>
               <ul className="space-y-2">
                 {quickLinks.map((link, index) => (
                   <li key={index}>
                     <a
                       href={link.href}
-                      className="inline-block text-gray-300 transition-colors duration-200 hover:text-white hover:translate-x-1"
+                      className="inline-block text-neon-cyan/80 transition-colors duration-200 hover:text-neon-pink hover:translate-x-1 font-mono"
                     >
                       {link.name}
                     </a>
@@ -94,15 +110,15 @@ const FooterModern = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h4 className="mb-4 text-lg font-semibold">Let's Connect</h4>
+              <h4 className="mb-4 text-lg font-semibold text-neon-cyan font-cyber">ESTABLISH_CONNECTION</h4>
               <div className="space-y-3">
-                <p className="text-sm text-gray-300">
+                <p className="text-sm text-neon-cyan/80 font-mono">
                   📧 vaibhavvaibhu2005@gmail.com
                 </p>
-                <p className="text-sm text-gray-300">
+                <p className="text-sm text-neon-pink/80 font-mono">
                   📱 +91 9900450852
                 </p>
-                <p className="text-sm text-gray-300">
+                <p className="text-sm text-neon-purple/80 font-mono">
                   📍 Mysore, Karnataka, India
                 </p>
               </div>
@@ -122,12 +138,12 @@ const FooterModern = () => {
                 href={social.href}
                 target={social.href.startsWith('mailto:') ? '_self' : '_blank'}
                 rel="noopener noreferrer"
-                className={`p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 ${social.color} transition-all duration-300 hover:scale-110 hover:bg-white/20`}
+                className={`p-3 rounded-full cyber-bg border border-neon-pink/30 hover:border-neon-pink ${social.color} transition-all duration-300 hover:scale-110 hover:shadow-neon`}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 title={social.label}
               >
-                <social.icon className="w-5 h-5" />
+                <social.icon className="w-5 h-5 animate-neon-glow" />
               </motion.a>
             ))}
           </motion.div>
@@ -137,41 +153,41 @@ const FooterModern = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="pt-8 border-t border-white/20"
+            className="pt-8 border-t border-neon-pink/30"
           >
             <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-              <div className="flex items-center space-x-2 text-gray-300">
+              <div className="flex items-center space-x-2 text-neon-cyan/80 font-mono">
                 <span>© {currentYear} Vaibhav M N. Made with</span>
                 <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 1, repeat: Infinity }}
                 >
-                  <Heart className="w-4 h-4 text-red-400 fill-current" />
+                  <Heart className="w-4 h-4 text-neon-pink fill-current animate-neon-glow" />
                 </motion.div>
                 <span>and lots of</span>
-                <Coffee className="w-4 h-4 text-amber-400" />
+                <Coffee className="w-4 h-4 text-neon-orange animate-neon-glow" />
               </div>
 
               <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-400">
+                <span className="text-sm text-neon-pink/70 font-cyber">
                   Built with Next.js, TypeScript & Tailwind CSS
                 </span>
                 <Button
                   onClick={scrollToTop}
                   size="sm"
                   variant="outline"
-                  className="text-white border-white/20 hover:bg-white/10"
+                  className="text-neon-pink border-neon-pink/50 hover:bg-neon-pink/10 font-cyber"
                 >
                   <ArrowUp className="w-4 h-4" />
                 </Button>
               </div>
             </div>
 
-            <div className="mt-4 text-sm text-center text-gray-400">
+            <div className="mt-4 text-sm text-center text-neon-cyan/70 font-mono">
               <p>
                 Open to opportunities • Available for collaborations • 
-                <a href="mailto:vaibhavvaibhu2005@gmail.com" className="ml-1 transition-colors hover:text-white">
-                  Let's build something amazing together!
+                <a href="mailto:vaibhavvaibhu2005@gmail.com" className="ml-1 transition-colors hover:text-neon-pink font-cyber">
+                  Let's build something cyber amazing together!
                 </a>
               </p>
             </div>
@@ -182,7 +198,7 @@ const FooterModern = () => {
       {/* Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="fixed z-50 p-3 text-white transition-all duration-300 rounded-full shadow-lg bottom-8 right-8 bg-gradient-to-r from-blue-500 to-purple-500 hover:shadow-xl"
+        className="fixed z-50 p-3 text-black transition-all duration-300 rounded-full shadow-lg bottom-8 right-8 bg-gradient-to-r from-neon-pink to-neon-purple hover:shadow-neon-strong"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         initial={{ opacity: 0, scale: 0 }}

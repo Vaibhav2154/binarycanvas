@@ -89,8 +89,30 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <section id="projects" className="relative py-20">
-      <div className="container relative z-10 px-4 mx-auto border-blue-200 sm:px-6 lg:px-8-">
+    <section id="projects" className="relative py-20 bg-gradient-to-br from-black via-purple-900/10 to-black overflow-hidden">
+      {/* Cyber Grid Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="grid-bg w-full h-full opacity-20" />
+        {Array.from({ length: 50 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-neon-pink"
+            animate={{
+              opacity: [0.1, 0.4, 0.1],
+            }}
+            transition={{
+              duration: Math.random() * 2 + 1,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+            style={{
+              left: Math.random() * 100 + '%',
+              top: Math.random() * 100 + '%',
+            }}
+          />
+        ))}
+      </div>
+      <div className="container relative z-10 px-4 mx-auto sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -98,14 +120,14 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
-          <div className="mb-16 text-center border-blue-200">
-            <h2 className="mb-6 text-3xl font-bold sm:text-4xl">Featured Projects</h2>
-            <p className="text-lg text-muted-foreground">
-              Innovative solutions built with cutting-edge technologies
+          <div className="mb-16 text-center">
+            <h2 className="mb-6 text-3xl font-bold sm:text-4xl gradient-text font-cyber">CYBER_PROJECTS.EXE</h2>
+            <p className="text-lg text-neon-cyan/80 font-mono">
+              Innovative cyber solutions built with cutting-edge technologies
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 border-blue-200 md:grid-cols-2 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
             {projects.map((project, index) => (
               <motion.div
                 key={index}
@@ -115,36 +137,36 @@ const Projects = () => {
                 whileHover={{ scale: 1.02, y: -10 }}
                 className="group"
               >
-                <Card className="h-full transition-all duration-300 border-0 bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 shadow-xl hover:shadow-2xl hover:shadow-primary/25 group glass">
+                <Card className="h-full transition-all duration-300 border-0 cyber-bg shadow-xl hover:shadow-2xl hover:shadow-neon-strong group glass">
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between">
                       <div className="flex items-start space-x-3">
-                        <div className="flex items-center justify-center w-12 h-12 transition-all duration-300 rounded-lg bg-gradient-to-r from-primary/20 to-primary/30 group-hover:from-primary/30 group-hover:to-primary/40 group-hover:scale-110">
-                          <project.icon className="w-6 h-6 text-primary" />
+                        <div className="flex items-center justify-center w-12 h-12 transition-all duration-300 rounded-lg bg-gradient-to-r from-neon-pink/20 to-neon-pink/30 group-hover:from-neon-pink/30 group-hover:to-neon-pink/40 group-hover:scale-110">
+                          <project.icon className="w-6 h-6 text-neon-pink animate-neon-glow" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="mb-1 text-xl font-bold">{project.title}</h3>
+                          <h3 className="mb-1 text-xl font-bold text-neon-cyan font-cyber">{project.title}</h3>
                           {project.award && (
-                            <Badge variant="destructive" className="mb-2">
+                            <Badge variant="destructive" className="mb-2 bg-neon-pink text-black border-neon-pink font-cyber">
                               {project.award}
                             </Badge>
                           )}
-                          <p className="text-sm text-muted-foreground">{project.category}</p>
+                          <p className="text-sm text-neon-pink/70 font-mono">{project.category}</p>
                         </div>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-muted-foreground">{project.description}</p>
+                    <p className="text-neon-cyan/80 font-mono">{project.description}</p>
                     
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                        <Badge key={techIndex} variant="secondary">
+                        <Badge key={techIndex} variant="secondary" className="cyber-bg text-neon-pink border-neon-pink/30 font-cyber text-xs">
                           {tech}
                         </Badge>
                       ))}
                       {project.technologies.length > 3 && (
-                        <Badge variant="outline">
+                        <Badge variant="outline" className="text-neon-cyan border-neon-cyan/50 font-cyber text-xs">
                           +{project.technologies.length - 3} more
                         </Badge>
                       )}
@@ -152,7 +174,7 @@ const Projects = () => {
 
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button variant="outline" className="w-full">
+                        <Button variant="outline" className="w-full text-neon-pink border-neon-pink hover:bg-neon-pink hover:text-black font-cyber">
                           View Details
                           <ExternalLink className="w-4 h-4 ml-2" />
                         </Button>

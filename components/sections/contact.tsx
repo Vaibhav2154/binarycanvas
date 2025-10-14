@@ -81,8 +81,30 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-muted/30">
-      <div className="container px-4 mx-auto sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 bg-gradient-to-br from-black via-purple-900/10 to-black overflow-hidden relative">
+      {/* Cyber Grid Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="grid-bg w-full h-full opacity-20" />
+        {Array.from({ length: 50 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-neon-pink"
+            animate={{
+              opacity: [0.1, 0.4, 0.1],
+            }}
+            transition={{
+              duration: Math.random() * 2 + 1,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+            style={{
+              left: Math.random() * 100 + '%',
+              top: Math.random() * 100 + '%',
+            }}
+          />
+        ))}
+      </div>
+      <div className="container px-4 mx-auto sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -91,9 +113,9 @@ const Contact = () => {
           className="max-w-4xl mx-auto"
         >
           <div className="mb-16 text-center">
-            <h2 className="mb-6 text-3xl font-bold sm:text-4xl">Get In Touch</h2>
-            <p className="max-w-2xl mx-auto text-lg text-muted-foreground">
-              I'm always open to discussing new opportunities, interesting projects,
+            <h2 className="mb-6 text-3xl font-bold sm:text-4xl gradient-text font-cyber">ESTABLISH_CONNECTION.EXE</h2>
+            <p className="max-w-2xl mx-auto text-lg text-neon-cyan/80 font-mono">
+              Always processing new opportunities, interesting cyber projects,
               or just having a conversation about technology and innovation.
             </p>
           </div>
@@ -106,26 +128,26 @@ const Contact = () => {
               whileHover={{ scale: 1.02, y: -5 }}
               className="group"
             >
-              <Card className="transition-all duration-300 border-0 shadow-xl bg-gradient-to-br from-white to-slate-50/80 dark:from-slate-900 dark:to-slate-800/80 hover:shadow-2xl hover:shadow-primary/25 glass">
+              <Card className="transition-all duration-300 border-0 shadow-xl cyber-bg hover:shadow-2xl hover:shadow-neon-strong glass">
                 <CardContent className="p-8">
-                  <h3 className="mb-6 text-xl font-bold">Contact Information</h3>
+                  <h3 className="mb-6 text-xl font-bold text-neon-cyan font-cyber">CONTACT_INFORMATION.DAT</h3>
                   <div className="space-y-4">
                     {contactInfo.map((info, index) => (
                       <div key={index} className="flex items-center space-x-4">
-                        <div className="flex items-center justify-center w-10 h-10 transition-all duration-300 rounded-lg bg-gradient-to-r from-primary/20 to-primary/30 group-hover:from-primary/30 group-hover:to-primary/40 group-hover:scale-110">
-                          <info.icon className="w-5 h-5 text-primary" />
+                        <div className="flex items-center justify-center w-10 h-10 transition-all duration-300 rounded-lg bg-gradient-to-r from-neon-pink/20 to-neon-pink/30 group-hover:from-neon-pink/30 group-hover:to-neon-pink/40 group-hover:scale-110">
+                          <info.icon className="w-5 h-5 text-neon-pink animate-neon-glow" />
                         </div>
                         <div>
-                          <div className="text-sm text-muted-foreground">{info.label}</div>
+                          <div className="text-sm text-neon-cyan/70 font-cyber">{info.label}</div>
                           {info.href ? (
                             <a
                               href={info.href}
-                              className="font-medium transition-colors hover:text-primary"
+                              className="font-medium transition-colors hover:text-neon-pink text-neon-cyan font-mono"
                             >
                               {info.value}
                             </a>
                           ) : (
-                            <div className="font-medium">{info.value}</div>
+                            <div className="font-medium text-neon-cyan font-mono">{info.value}</div>
                           )}
                         </div>
                       </div>
@@ -133,7 +155,7 @@ const Contact = () => {
                   </div>
 
                   <div className="mt-8">
-                    <h4 className="mb-4 font-semibold">Social Media</h4>
+                    <h4 className="mb-4 font-semibold text-neon-purple font-cyber">SOCIAL_NETWORKS</h4>
                     <div className="space-y-3">
                       {socialLinks.map((social, index) => (
                         <motion.a
@@ -143,12 +165,12 @@ const Contact = () => {
                           rel="noopener noreferrer"
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className="flex items-center p-3 space-x-3 transition-colors rounded-lg bg-accent/50 hover:bg-accent"
+                          className="flex items-center p-3 space-x-3 transition-colors rounded-lg cyber-bg hover:shadow-neon"
                         >
-                          <social.icon className="w-5 h-5 text-primary" />
+                          <social.icon className="w-5 h-5 text-neon-pink animate-neon-glow" />
                           <div>
-                            <div className="font-medium">{social.label}</div>
-                            <div className="text-sm text-muted-foreground">{social.username}</div>
+                            <div className="font-medium text-neon-cyan font-cyber">{social.label}</div>
+                            <div className="text-sm text-neon-pink/70 font-mono">{social.username}</div>
                           </div>
                         </motion.a>
                       ))}

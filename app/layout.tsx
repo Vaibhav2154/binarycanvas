@@ -1,12 +1,27 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Orbitron, Rajdhani, Share_Tech_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AudioProvider } from '@/components/audio-context';
 import { Toaster } from '@/components/ui/sonner';
 import Script from 'next/script';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const orbitron = Orbitron({ 
+  subsets: ['latin'], 
+  variable: '--font-orbitron',
+  weight: ['400', '500', '600', '700', '800', '900']
+});
+const rajdhani = Rajdhani({ 
+  subsets: ['latin'], 
+  variable: '--font-rajdhani',
+  weight: ['300', '400', '500', '600', '700']
+});
+const shareTechMono = Share_Tech_Mono({ 
+  subsets: ['latin'], 
+  variable: '--font-share-tech-mono',
+  weight: ['400']
+});
 
 export const metadata: Metadata = {
   title: 'Vaibhav M N - Full Stack Developer',
@@ -90,7 +105,7 @@ export default function RootLayout({
               g.async=true; g.src='https://cdn.matomo.cloud/binaryanvasvercel.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
             })();
           `}        </Script>
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${orbitron.variable} ${rajdhani.variable} ${shareTechMono.variable} font-sans`}>
       
         
         {/* Matomo Analytics */}
