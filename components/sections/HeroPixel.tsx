@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Play, Pause, Volume2, VolumeX, Terminal, Cpu, Code2, Zap, Shield, Brain, Smartphone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useAudio } from '@/components/audio-context';
+import { useAudio } from '@/components/AudioContext';
 
-const CyberpunkHero = () => {
+const Hero = () => {
   const [currentModule, setCurrentModule] = useState(0);
   const [isActive, setIsActive] = useState(true);
   const [mounted, setMounted] = useState(false);
@@ -17,8 +17,8 @@ const CyberpunkHero = () => {
 
   const cyberModules = [
     {
-      title: "NEURAL_INTERFACE",
-      subtitle: "FULL STACK DEVELOPER",
+      title: "FULLSTACK_CORE",
+      subtitle: "NEXT JS DEVELOPER",
       description: "Building digital ecosystems with cutting-edge technology",
       color: "text-neon-pink",
       icon: Code2,
@@ -26,7 +26,7 @@ const CyberpunkHero = () => {
     },
     {
       title: "MOBILE_CORE", 
-      subtitle: "MOBILE SPECIALIST",
+      subtitle: "FLUTTER APP DEVELOPER",
       description: "Crafting immersive mobile experiences that users adore",
       color: "text-neon-cyan",
       icon: Smartphone,
@@ -39,14 +39,6 @@ const CyberpunkHero = () => {
       color: "text-neon-purple",
       icon: Brain,
       bgPattern: "from-neon-purple/10 to-transparent"
-    },
-    {
-      title: "SECURITY_MATRIX",
-      subtitle: "CYBERSECURITY EXPERT",
-      description: "Fortifying digital fortresses against cyber threats",
-      color: "text-neon-green",
-      icon: Shield,
-      bgPattern: "from-neon-green/10 to-transparent"
     }
   ];
 
@@ -124,35 +116,10 @@ const CyberpunkHero = () => {
     nextSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const MatrixRain = () => (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 50 }).map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-neon-cyan font-mono text-xs"
-          animate={{
-            y: [0, 1000],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: Math.random() * 3 + 2,
-            repeat: Infinity,
-            delay: Math.random() * 2,
-          }}
-          style={{
-            left: Math.random() * 100 + '%',
-            top: -100,
-          }}
-        >
-          {String.fromCharCode(0x30A0 + Math.random() * 96)}
-        </motion.div>
-      ))}
-    </div>
-  );
 
   const CyberGrid = () => (
     <div className="absolute inset-0 pointer-events-none opacity-20">
-      <div className="grid-bg w-full h-full" />
+      <div className="w-full h-full grid-bg" />
       {Array.from({ length: 100 }).map((_, i) => (
         <motion.div
           key={i}
@@ -225,15 +192,15 @@ const CyberpunkHero = () => {
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 1, duration: 0.8 }}
-      className="absolute top-8 left-8 z-20"
+      className="absolute z-20 top-8 left-8"
     >
-      <div className="cyber-bg p-4 rounded-lg">
-        <div className="text-neon-pink font-cyber text-xs mb-2 tracking-wider">SYSTEM METRICS</div>
+      <div className="p-4 rounded-lg cyber-bg">
+        <div className="mb-2 text-xs tracking-wider text-neon-pink font-cyber">SYSTEM METRICS</div>
         <div className="space-y-2">
           {systemMetrics.map((metric, index) => (
             <div key={index} className="flex items-center space-x-2">
-              <div className="text-neon-cyan font-mono text-xs w-8">{metric.label}</div>
-              <div className="flex-1 bg-black/50 rounded-full h-2 overflow-hidden">
+              <div className="w-8 font-mono text-xs text-neon-cyan">{metric.label}</div>
+              <div className="flex-1 h-2 overflow-hidden rounded-full bg-black/50">
                 <motion.div
                   className={`h-full ${metric.color}`}
                   initial={{ width: 0 }}
@@ -241,7 +208,7 @@ const CyberpunkHero = () => {
                   transition={{ delay: 1.5 + index * 0.1, duration: 1 }}
                 />
               </div>
-              <div className="text-neon-pink font-cyber text-xs w-8">{metric.value}%</div>
+              <div className="w-8 text-xs text-neon-pink font-cyber">{metric.value}%</div>
             </div>
           ))}
         </div>
@@ -254,23 +221,23 @@ const CyberpunkHero = () => {
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 1.2, duration: 0.8 }}
-      className="absolute top-8 right-8 z-20"
+      className="absolute z-20 top-8 right-8"
     >
       <div className="cyber-bg p-4 rounded-lg min-w-[300px]">
-        <div className="flex items-center space-x-2 mb-3">
+        <div className="flex items-center mb-3 space-x-2">
           <div className="flex space-x-1">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
           </div>
-          <div className="text-neon-cyan font-cyber text-xs tracking-wider">TERMINAL</div>
+          <div className="text-xs tracking-wider text-neon-cyan font-cyber">TERMINAL</div>
         </div>
         <div className="space-y-2">
           <Button
             variant="outline"
             size="sm"
             onClick={() => setIsActive(!isActive)}
-            className="text-neon-pink border-neon-pink hover:bg-neon-pink hover:text-black font-cyber text-xs mr-2"
+            className="mr-2 text-xs text-neon-pink border-neon-pink hover:bg-neon-pink hover:text-black font-cyber"
           >
             {isActive ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
           </Button>
@@ -278,12 +245,12 @@ const CyberpunkHero = () => {
             variant="outline"
             size="sm"
             onClick={toggleMute}
-            className="text-neon-cyan border-neon-cyan hover:bg-neon-cyan hover:text-black font-cyber text-xs"
+            className="text-xs text-neon-cyan border-neon-cyan hover:bg-neon-cyan hover:text-black font-cyber"
           >
             {!isMuted ? <Volume2 className="w-3 h-3" /> : <VolumeX className="w-3 h-3" />}
           </Button>
         </div>
-        <div className="mt-3 text-neon-green font-mono text-xs">
+        <div className="mt-3 font-mono text-xs text-neon-green">
           <div className="mb-1">vaibhav@cyber:~$ {terminalOutput}</div>
           <div className="text-neon-pink">Status: {isActive ? 'ONLINE' : 'STANDBY'}</div>
         </div>
@@ -294,8 +261,8 @@ const CyberpunkHero = () => {
   if (!mounted) {
     return (
       <section id="hero" className="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-black">
-        <div className="text-white text-center">
-          <div className="text-6xl font-cyber mb-4">VAIBHAV</div>
+        <div className="text-center text-white">
+          <div className="mb-4 text-6xl font-cyber">VAIBHAV</div>
           <div className="text-xl text-neon-cyan font-cyber">Loading...</div>
         </div>
       </section>
@@ -304,9 +271,6 @@ const CyberpunkHero = () => {
 
   return (
     <section id="hero" className="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-br from-black via-purple-900/20 to-black">
-      {/* Matrix Rain Background */}
-      <MatrixRain />
-      
       {/* Cyber Grid */}
       <CyberGrid />
       
@@ -352,11 +316,11 @@ const CyberpunkHero = () => {
               VAIBHAV
             </motion.h1>
             <motion.div
-              className="text-lg md:text-xl lg:text-2xl text-neon-cyan font-cyber tracking-wider"
+              className="text-lg tracking-wider md:text-xl lg:text-2xl text-neon-cyan font-cyber"
               animate={{ opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              CYBER_DEVELOPER.EXE
+              DEVELOPER.EXE
             </motion.div>
           </motion.div>
 
@@ -370,7 +334,7 @@ const CyberpunkHero = () => {
               transition={{ duration: 0.8 }}
               className="mb-8"
             >
-              <div className="cyber-bg p-8 rounded-lg max-w-2xl mx-auto">
+              <div className="max-w-2xl p-8 mx-auto rounded-lg cyber-bg">
                 <div className="flex items-center justify-center mb-4">
                   {React.createElement(cyberModules[currentModule].icon, { className: `w-8 h-8 mr-3 ${cyberModules[currentModule].color}` })}
                   <motion.div
@@ -389,7 +353,7 @@ const CyberpunkHero = () => {
                 </div>
                 
                 <motion.div
-                  className="text-lg md:text-xl font-cyber text-neon-cyan mb-4"
+                  className="mb-4 text-lg md:text-xl font-cyber text-neon-cyan"
                   animate={{ opacity: [0.8, 1, 0.8] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 >
@@ -399,7 +363,7 @@ const CyberpunkHero = () => {
                 <motion.div
                   className="text-base md:text-lg text-neon-green font-mono min-h-[2rem] flex items-center justify-center"
                 >
-                  <span className="text-neon-pink mr-2">&gt;</span>
+                  <span className="mr-2 text-neon-pink">&gt;</span>
                   {displayText}
                   <motion.span
                     animate={{ opacity: [1, 0] }}
@@ -418,13 +382,13 @@ const CyberpunkHero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.8 }}
-            className="mb-8 w-full max-w-md"
+            className="w-full max-w-md mb-8"
           >
-            <div className="flex justify-between text-neon-pink font-cyber text-xs mb-2">
+            <div className="flex justify-between mb-2 text-xs text-neon-pink font-cyber">
               <span>MODULE_{currentModule + 1}_OF_{cyberModules.length}</span>
               <span>{Math.round(((currentModule + 1) / cyberModules.length) * 100)}%</span>
             </div>
-            <div className="bg-black/50 rounded-full h-3 overflow-hidden">
+            <div className="h-3 overflow-hidden rounded-full bg-black/50">
               <motion.div
                 className="h-full bg-gradient-to-r from-neon-pink to-neon-purple"
                 initial={{ width: 0 }}
@@ -439,11 +403,11 @@ const CyberpunkHero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-center gap-4"
+            className="flex flex-col items-center gap-4 sm:flex-row"
           >
             <Button
               onClick={() => scrollToNext()}
-              className="px-8 py-4 bg-neon-pink text-black hover:bg-neon-pink/80 font-cyber text-sm transition-all duration-300 hover:shadow-neon-strong animate-neon-glow"
+              className="px-8 py-4 text-sm text-black transition-all duration-300 bg-neon-pink hover:bg-neon-pink/80 font-cyber hover:shadow-neon-strong animate-neon-glow"
             >
               INITIALIZE_SYSTEM
             </Button>
@@ -451,7 +415,7 @@ const CyberpunkHero = () => {
               variant="outline"
               size="sm"
               onClick={() => setShowSystem(!showSystem)}
-              className="text-neon-cyan border-neon-cyan hover:bg-neon-cyan hover:text-black font-cyber text-xs"
+              className="text-xs text-neon-cyan border-neon-cyan hover:bg-neon-cyan hover:text-black font-cyber"
             >
               SYSTEM_INFO
             </Button>
@@ -471,5 +435,5 @@ const CyberpunkHero = () => {
   );
 };
 
-export default CyberpunkHero;
+export default Hero;
 

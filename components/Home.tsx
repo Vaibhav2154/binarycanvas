@@ -2,16 +2,11 @@
 
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import Header from '@/components/sections/header';
-import Hero from '@/components/sections/hero';
+import Hero from '@/components/sections/Hero';
 import Footer from '@/components/sections/footer';
 import { isMobileDevice } from '@/lib/performance';
 
 // Lazy load components with error boundaries
-const About = lazy(() => import('@/components/sections/about').catch(err => {
-  console.error('Failed to load About component:', err);
-  return { default: () => <div>Failed to load section</div> };
-}));
-
 const Education = lazy(() => import('@/components/sections/education').catch(err => {
   console.error('Failed to load Education component:', err);
   return { default: () => <div>Failed to load section</div> };
@@ -62,7 +57,7 @@ const SectionSkeleton = () => {
   );
 };
 
-export default function OptimizedHome() {
+export default function Home() {
   const [mounted, setMounted] = useState(false);
   
   useEffect(() => {
@@ -79,10 +74,6 @@ export default function OptimizedHome() {
         <main className="relative pt-16">
           {/* Hero section loads immediately */}
           <Hero />
-          {/* Lazy load sections with suspense */}
-          <Suspense fallback={<SectionSkeleton />}>
-            <About />
-          </Suspense>
           
           <Suspense fallback={<SectionSkeleton />}>
             <Education />

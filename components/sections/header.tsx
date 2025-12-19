@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import ThemeToggle from '@/components/theme-toggle';
 import Image from 'next/image';
 
 const Header = () => {
@@ -16,7 +15,6 @@ const Header = () => {
 
   const navItems = [
     { name: 'Home', href: '#hero' },
-    { name: 'About', href: '#about' },
     { name: 'Education', href: '#education' },
     { name: 'Experience', href: '#experience' },
     { name: 'Projects', href: '#projects' },
@@ -294,7 +292,7 @@ const Header = () => {
                     initial={mounted ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
                     animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
                     transition={mounted ? { delay: index * 0.1 } : {}}
-                    className="p-2 text-neon-cyan transition-all duration-200 rounded-lg hover:text-white hover:bg-neon-cyan/20 hover:shadow-neon focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-opacity-50"
+                    className="p-2 transition-all duration-200 rounded-lg text-neon-cyan hover:text-white hover:bg-neon-cyan/20 hover:shadow-neon focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-opacity-50"
                     title={social.label}
                     suppressHydrationWarning
                     aria-label={`Visit ${social.label} profile`}
@@ -303,22 +301,15 @@ const Header = () => {
                   </motion.a>
                 ))}
               </div>
-
-              {/* Theme Toggle */}
-              <div className="pl-2 border-l border-neon-cyan/20">
-                <ThemeToggle />
-              </div>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="flex items-center space-x-2 lg:hidden">
-              {/* Mobile Theme Toggle */}
-              <ThemeToggle size="sm" />              {/* Mobile Menu Toggle */}
               <motion.button
                 onClick={toggleMobileMenu}
                 whileHover={mounted ? { scale: 1.1 } : {}}
                 whileTap={mounted ? { scale: 0.9 } : {}}
-                className="p-2 text-neon-cyan transition-all duration-200 rounded-lg mobile-menu-button hover:text-white hover:bg-neon-cyan/20 focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-opacity-50"
+                className="p-2 transition-all duration-200 rounded-lg text-neon-cyan mobile-menu-button hover:text-white hover:bg-neon-cyan/20 focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-opacity-50"
                 aria-label="Toggle mobile menu"
                 aria-expanded={isMobileMenuOpen}
                 suppressHydrationWarning
@@ -397,7 +388,7 @@ const Header = () => {
                     </span>
                   </motion.div>                  <motion.button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 text-neon-cyan transition-all duration-200 rounded-lg hover:text-white hover:bg-neon-cyan/20 focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-opacity-50"
+                    className="p-2 transition-all duration-200 rounded-lg text-neon-cyan hover:text-white hover:bg-neon-cyan/20 focus:outline-none focus:ring-2 focus:ring-neon-cyan focus:ring-opacity-50"
                     aria-label="Close mobile menu"
                     whileHover={mounted ? { scale: 1.1, rotate: 90 } : {}}
                     whileTap={mounted ? { scale: 0.9 } : {}}
@@ -444,7 +435,7 @@ const Header = () => {
                         initial={mounted ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}
                         animate={mounted ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
                         transition={mounted ? { delay: 0.3 + index * 0.1 } : {}}
-                        className="p-3 text-neon-cyan transition-all duration-200 bg-neon-pink/10 rounded-full hover:text-white hover:bg-neon-pink/20 hover:shadow-neon focus:outline-none focus:ring-2 focus:ring-neon-pink focus:ring-opacity-50"
+                        className="p-3 transition-all duration-200 rounded-full text-neon-cyan bg-neon-pink/10 hover:text-white hover:bg-neon-pink/20 hover:shadow-neon focus:outline-none focus:ring-2 focus:ring-neon-pink focus:ring-opacity-50"
                         title={social.label}
                         suppressHydrationWarning
                         aria-label={`Visit ${social.label} profile`}

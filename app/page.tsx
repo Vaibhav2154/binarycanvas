@@ -1,6 +1,5 @@
-import InnovativePortfolio from '@/components/innovative-portfolio';
-import OptimizedHome from '@/components/optimized-home';
+import Home from '@/components/Home';
 
-export default function Home() {
-  return <OptimizedHome />;
+export default function Page() {
+  return <Home />;
 }

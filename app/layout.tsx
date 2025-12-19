@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Orbitron, Rajdhani, Share_Tech_Mono } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/components/theme-provider';
-import { AudioProvider } from '@/components/audio-context';
+import { AudioProvider } from '@/components/AudioContext';
 import { Toaster } from '@/components/ui/sonner';
 import Script from 'next/script';
 
@@ -109,17 +108,11 @@ export default function RootLayout({
       
         
         {/* Matomo Analytics */}
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
           <AudioProvider>
             {children}
           </AudioProvider>
           <Toaster />
-        </ThemeProvider>
+        
       </body>
     </html>
   );
