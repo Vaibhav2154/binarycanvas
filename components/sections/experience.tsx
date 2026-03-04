@@ -20,6 +20,7 @@ const Experience = () => {
       location: "Mumbai, India",
       type: "Leadership Role",
       icon: Trophy,
+      color: "bg-[#FFE500]",
       achievements: [
         "Engaged 2500+ Indian & 500+ international colleges in outreach and marketing",
         "Ranked 9th among 11,500+ Campus Ambassadors with 28,950 points",
@@ -34,6 +35,7 @@ const Experience = () => {
       location: "Remote",
       type: "Technical Leadership",
       icon: Code,
+      color: "bg-[#FF6B9D]",
       achievements: [
         "Led technical teams ensuring effective communication and task management",
         "Managed seamless workflow for projects and internships",
@@ -48,6 +50,7 @@ const Experience = () => {
       location: "JSS STU, Mysore",
       type: "Technical Role",
       icon: Users,
+      color: "bg-[#00D4FF]",
       achievements: [
         "Organized hands-on workshops like 'Mystery of C' for in-depth learning",
         "Conducted engaging events: Bermuda Triangle, Smack D Bug, Track Back",
@@ -56,12 +59,13 @@ const Experience = () => {
       ]
     },
     {
-      title: "Freelancer & Open Source Contributor",
+      title: "Freelancer & Open Source",
       company: "Various Projects",
       period: "2023 - Present",
       location: "Remote",
       type: "Freelance Work",
       icon: Briefcase,
+      color: "bg-[#00FF94]",
       achievements: [
         "Flutter App development projects for multiple clients",
         "Open Source Contributor - PHICSIT, GSSOC'24",
@@ -72,155 +76,90 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="relative py-32 overflow-hidden bg-gradient-to-br from-black via-purple-900/10 to-black">
-      {/* Cyber Grid Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="grid-bg w-full h-full opacity-20" />
-        {Array.from({ length: 50 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-neon-pink"
-            animate={{
-              opacity: [0.1, 0.4, 0.1],
-            }}
-            transition={{
-              duration: Math.random() * 2 + 1,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-            style={{
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-            }}
-          />
-        ))}
-      </div>
+    <section id="experience" className="relative py-20 bg-[#FF6B9D] brutal-stripes overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-20 left-10 w-20 h-20 bg-[#FFE500] border-4 border-black rotate-12 hidden md:block" />
+      <div className="absolute top-40 right-20 w-16 h-16 bg-white border-4 border-black -rotate-6 hidden md:block" />
+      <div className="absolute bottom-32 left-1/4 w-12 h-12 bg-[#00D4FF] border-4 border-black rotate-45 hidden md:block" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="max-w-7xl mx-auto"
+          transition={{ duration: 0.5 }}
+          className="max-w-5xl mx-auto"
         >
-          {/* Unique Header */}
-          <div className="text-center mb-20">
+          {/* Section Header */}
+          <div className="text-center mb-16">
             <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={inView ? { scale: 1, rotate: 0 } : {}}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
               className="inline-block mb-6"
             >
-              <div className="relative">
-                <Briefcase className="relative w-16 h-16 text-neon-pink animate-neon-glow" />
+              <div className="px-8 py-3 bg-white border-4 border-black shadow-brutal inline-flex items-center gap-3">
+                <Briefcase className="w-8 h-8" />
+                <h2 className="text-3xl sm:text-4xl font-black uppercase">EXPERIENCE</h2>
               </div>
             </motion.div>
-            <h2 className="text-5xl sm:text-6xl font-bold mb-6 gradient-text font-cyber">
-              EXPERIENCE_LOG.DAT
-            </h2>
-            <p className="text-xl text-neon-cyan/80 max-w-2xl mx-auto font-mono">
+            <p className="text-lg font-bold max-w-xl mx-auto bg-white inline-block px-6 py-2 border-4 border-black shadow-brutal-sm">
               A journey through leadership roles and technical contributions
             </p>
           </div>
 
-          {/* Zigzag Timeline Layout */}
-          <div className="relative">
-            {/* Central connecting line (hidden on mobile) */}
-            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-neon-pink/50 transform -translate-x-1/2" />
+          {/* Experience Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`${exp.color} border-4 border-black shadow-brutal p-6 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-brutal-lg transition-all duration-150`}
+              >
+                {/* Header */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-14 h-14 bg-white border-4 border-black shadow-brutal-sm flex items-center justify-center flex-shrink-0">
+                    <exp.icon className="w-7 h-7" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-black uppercase">{exp.title}</h3>
+                    <p className="font-bold">{exp.company}</p>
+                  </div>
+                </div>
 
-            <div className="space-y-32">
-              {experiences.map((exp, index) => {
-                const isEven = index % 2 === 0;
+                {/* Meta info */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Badge variant="outline" className="bg-white">
+                    <Calendar className="w-3 h-3 mr-1" />
+                    {exp.period}
+                  </Badge>
+                  <Badge variant="outline" className="bg-white">
+                    <MapPin className="w-3 h-3 mr-1" />
+                    {exp.location}
+                  </Badge>
+                </div>
 
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: isEven ? -150 : 150, y: 50 }}
-                    animate={inView ? { opacity: 1, x: 0, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: index * 0.2, type: "spring" }}
-                    className={`relative flex flex-col lg:flex-row items-center gap-12 ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
-                  >
-                    {/* Timeline node */}
-                    <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 z-10">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={inView ? { scale: 1 } : {}}
-                        transition={{ delay: index * 0.2 + 0.3, type: "spring" }}
-                        className="w-16 h-16 rounded-full bg-neon-pink shadow-2xl ring-4 ring-black flex items-center justify-center"
-                      >
-                        <exp.icon className="w-8 h-8 text-black animate-neon-glow" />
-                      </motion.div>
+                {/* Type badge */}
+                <Badge className="bg-black text-white mb-4">{exp.type}</Badge>
+
+                {/* Achievements */}
+                <div className="space-y-2 pt-4 border-t-4 border-black">
+                  {exp.achievements.map((achievement, achIndex) => (
+                    <div key={achIndex} className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-black mt-2 flex-shrink-0" />
+                      <p className="font-medium text-sm">{achievement}</p>
                     </div>
-
-                    {/* Content Card */}
-                    <div className={`flex-1 w-full ${isEven ? 'lg:pr-24' : 'lg:pl-24'}`}>
-                      <motion.div
-                        whileHover={{ scale: 1.03, y: -10 }}
-                        className="relative group"
-                      >
-                        <div className="relative cyber-bg backdrop-blur-xl rounded-3xl p-8 shadow-2xl hover:shadow-neon-strong transition-all duration-300 glass">
-                          {/* Mobile icon */}
-                          <div className="lg:hidden mb-6">
-                            <div className="inline-flex items-center justify-center w-12 h-12 transition-all duration-300 rounded-lg bg-gradient-to-r from-neon-pink/20 to-neon-pink/30 group-hover:from-neon-pink/30 group-hover:to-neon-pink/40 group-hover:scale-110">
-                              <exp.icon className="w-6 h-6 text-neon-pink animate-neon-glow" />
-                            </div>
-                          </div>
-
-                          {/* Header */}
-                          <div className="mb-6">
-                            <div className="flex items-start justify-between gap-4 mb-4">
-                              <div>
-                                <h3 className="text-2xl font-bold text-neon-cyan mb-2 font-cyber">{exp.title}</h3>
-                                <p className="text-xl font-semibold gradient-text font-cyber">
-                                  {exp.company}
-                                </p>
-                              </div>
-                              <Badge className="bg-neon-pink text-black border-neon-pink font-cyber">
-                                {exp.type}
-                              </Badge>
-                            </div>
-
-                            <div className="flex flex-wrap gap-3 text-sm">
-                              <Badge variant="outline" className="cyber-bg border-neon-pink/30 text-neon-cyan font-cyber">
-                                <Calendar className="w-3.5 h-3.5 mr-1.5" />
-                                {exp.period}
-                              </Badge>
-                              <Badge variant="outline" className="cyber-bg border-neon-pink/30 text-neon-cyan font-cyber">
-                                <MapPin className="w-3.5 h-3.5 mr-1.5" />
-                                {exp.location}
-                              </Badge>
-                            </div>
-                          </div>
-
-                          {/* Achievements */}
-                          <div className="space-y-3 pt-4 border-t border-neon-pink/30">
-                            {exp.achievements.map((achievement, achIndex) => (
-                              <motion.div
-                                key={achIndex}
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={inView ? { opacity: 1, x: 0 } : {}}
-                                transition={{ delay: index * 0.2 + achIndex * 0.1 }}
-                                className="flex items-start gap-3 group/item"
-                              >
-                                <div className="w-2 h-2 rounded-full bg-neon-pink mt-2 flex-shrink-0 group-hover/item:scale-150 transition-transform animate-neon-glow" />
-                                <p className="text-neon-cyan/80 leading-relaxed flex-1 font-mono">{achievement}</p>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    </div>
-
-                    {/* Spacer for zigzag effect */}
-                    <div className={`hidden lg:block flex-1 ${isEven ? 'pl-24' : 'pr-24'}`} />
-                  </motion.div>
-                );
-              })}
-            </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>
+
+      {/* Bottom decorative bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-4 bg-black" />
     </section>
   );
 };
