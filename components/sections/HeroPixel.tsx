@@ -11,20 +11,20 @@ const Hero = () => {
 
   const roles = [
     {
-      title: "FULLSTACK DEVELOPER",
-      subtitle: "NEXT.JS & REACT",
+      title: "WEB DEVELOPER",
+      subtitle: "NEXT.JS, REACT, FASTAPI",
       color: "bg-[#FFE500]",
       icon: Code2,
     },
     {
-      title: "MOBILE DEVELOPER", 
+      title: "MOBILE DEVELOPER",
       subtitle: "FLUTTER APPS",
       color: "bg-[#FF6B9D]",
       icon: Smartphone,
     },
     {
-      title: "AI/ML ENGINEER", 
-      subtitle: "MACHINE LEARNING",
+      title: "CYBER SECURITY ENGINEER",
+      subtitle: "SIEM, THREAT MODELING & MONITORING",
       color: "bg-[#00D4FF]",
       icon: Brain,
     }
@@ -64,19 +64,19 @@ const Hero = () => {
       <div className="absolute top-32 right-20 w-16 h-16 bg-[#FF6B9D] border-4 border-black -rotate-6 hidden md:block" />
       <div className="absolute bottom-32 left-20 w-24 h-24 bg-[#00D4FF] border-4 border-black rotate-45 hidden md:block" />
       <div className="absolute bottom-20 right-32 w-12 h-12 bg-[#00FF94] border-4 border-black -rotate-12 hidden md:block" />
-      
+
       {/* Stars decoration */}
-      <div className="absolute top-40 left-1/4 hidden md:block">
+      <div className="absolute hidden top-40 left-1/4 md:block">
         <Star className="w-8 h-8 text-black fill-[#FFE500]" />
       </div>
-      <div className="absolute bottom-40 right-1/4 hidden md:block">
+      <div className="absolute hidden bottom-40 right-1/4 md:block">
         <Star className="w-10 h-10 text-black fill-[#FF6B9D]" />
       </div>
 
       <div className="container relative z-10 flex flex-col items-center justify-center min-h-screen px-4 mx-auto">
         {/* Main Content */}
         <motion.div
-          className="text-center max-w-4xl"
+          className="max-w-4xl text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -89,7 +89,7 @@ const Hero = () => {
             className="inline-block mb-6"
           >
             <div className="px-6 py-2 bg-[#FFE500] border-4 border-black shadow-brutal inline-block">
-              <span className="text-sm font-black uppercase tracking-widest">👋 Hello, I&apos;m</span>
+              <span className="text-sm font-black tracking-widest uppercase">👋 Hello, I&apos;m</span>
             </div>
           </motion.div>
 
@@ -98,7 +98,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="mb-6 text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight"
+            className="mb-6 text-6xl font-black tracking-tight uppercase md:text-8xl lg:text-9xl"
           >
             <span className="relative inline-block">
               VAIBHAV
@@ -119,10 +119,10 @@ const Hero = () => {
               <div className={`inline-flex items-center gap-4 px-8 py-4 ${roles[currentRole].color} border-4 border-black shadow-brutal-lg`}>
                 {React.createElement(roles[currentRole].icon, { className: "w-8 h-8" })}
                 <div className="text-left">
-                  <div className="text-2xl md:text-3xl font-black uppercase">
+                  <div className="text-2xl font-black uppercase md:text-3xl">
                     {roles[currentRole].title}
                   </div>
-                  <div className="text-sm font-bold uppercase tracking-wider opacity-80">
+                  <div className="text-sm font-bold tracking-wider uppercase opacity-80">
                     {roles[currentRole].subtitle}
                   </div>
                 </div>
@@ -141,9 +141,8 @@ const Hero = () => {
               <button
                 key={index}
                 onClick={() => setCurrentRole(index)}
-                className={`w-12 h-3 border-2 border-black transition-all ${
-                  currentRole === index ? role.color : 'bg-white'
-                }`}
+                className={`w-12 h-3 border-2 border-black transition-all ${currentRole === index ? role.color : 'bg-white'
+                  }`}
               />
             ))}
           </motion.div>
@@ -153,9 +152,9 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="max-w-2xl mx-auto mb-10 text-lg md:text-xl font-medium"
+            className="max-w-2xl mx-auto mb-10 text-lg font-medium md:text-xl"
           >
-            Computer Science student passionate about building innovative 
+            Computer Science student passionate about building innovative
             digital solutions. Creating impactful applications with modern technologies.
           </motion.p>
 
@@ -164,15 +163,15 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.5 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Button
               onClick={scrollToNext}
-              className="group text-base"
+              className="text-base group"
               size="lg"
             >
               VIEW MY WORK
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button
               variant="outline"
@@ -186,39 +185,6 @@ const Hero = () => {
               GET IN TOUCH
             </Button>
           </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.5 }}
-            className="flex flex-wrap justify-center gap-6 mt-16"
-          >
-            {[
-              { value: "10+", label: "HACKATHON FINALS" },
-              { value: "20+", label: "PROJECTS" },
-              { value: "9.58", label: "CGPA" },
-            ].map((stat, index) => (
-              <div
-                key={index}
-                className="px-6 py-4 bg-white border-4 border-black shadow-brutal"
-              >
-                <div className="text-3xl font-black">{stat.value}</div>
-                <div className="text-xs font-bold uppercase tracking-wider">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          <div className="p-2 bg-white border-4 border-black shadow-brutal">
-            <ChevronDown className="w-6 h-6" />
-          </div>
         </motion.div>
       </div>
 
