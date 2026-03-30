@@ -18,12 +18,12 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "DRAMS",
-      subtitle: "Disaster Response & Management",
-      description: "Built during a hackathon, DRAMS simulates real-time disaster data to generate location-based alerts.",
-      fullDescription: "A comprehensive disaster management system that uses machine learning to simulate real-time disaster scenarios. The system generates location-based alerts and uses GIS mapping to visualize affected regions.",
-      technologies: ["Machine Learning", "GIS Mapping", "Python", "Data Viz"],
-      category: "ML",
+      title: "LOGIQ",
+      subtitle: "AI Platform for Threat Detection & Analysis",
+      description: "Built during a hackathon, LOGIQ provides advanced threat detection and analysis capabilities.",
+      fullDescription: "A comprehensive, AI-enhanced cybersecurity platform that combines real-time log analysis, MITRE ATT&CK framework integration, and intelligent threat detection into a unified solution. Built for security professionals, incident responders, and SOC teams.",
+      technologies: ["Machine Learning", "Next.js","FastAPI", "MongoDB","RAG","Data Visualization"],
+      category: "SIEM/Threat Detection",
       icon: Shield,
       features: [
         "Real-time disaster data simulation",
@@ -31,7 +31,8 @@ const Projects = () => {
         "GIS mapping integration",
         "Resource allocation optimization"
       ],
-      achievements: ["Built during hackathon", "Real-world application"]
+      achievements: ["Built during hackathon", "Real-world application"],
+      award: "🏆 Winner"
     },
     {
       title: "MindFull",
@@ -88,7 +89,7 @@ const Projects = () => {
     <section id="projects" className="relative py-20 bg-[#00D4FF] brutal-checker overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-16 right-10 w-24 h-24 bg-[#FFE500] border-4 border-black rotate-12 hidden md:block" />
-      <div className="absolute top-40 left-16 w-16 h-16 bg-white border-4 border-black -rotate-6 hidden md:block" />
+      <div className="absolute hidden w-16 h-16 bg-white border-4 border-black top-40 left-16 -rotate-6 md:block" />
       <div className="absolute bottom-32 right-1/4 w-20 h-20 bg-[#FF6B9D] border-4 border-black rotate-45 hidden md:block" />
 
       <div className="container relative z-10 px-4 mx-auto sm:px-6 lg:px-8">
@@ -106,12 +107,12 @@ const Projects = () => {
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               className="inline-block mb-6"
             >
-              <div className="px-8 py-3 bg-white border-4 border-black shadow-brutal inline-flex items-center gap-3">
+              <div className="inline-flex items-center gap-3 px-8 py-3 bg-white border-4 border-black shadow-brutal">
                 <Code className="w-8 h-8" />
-                <h2 className="text-3xl sm:text-4xl font-black uppercase">PROJECTS</h2>
+                <h2 className="text-3xl font-black uppercase sm:text-4xl">PROJECTS</h2>
               </div>
             </motion.div>
-            <p className="text-lg font-bold max-w-xl mx-auto bg-black text-white inline-block px-6 py-2 border-4 border-black shadow-brutal-sm">
+            <p className="inline-block max-w-xl px-6 py-2 mx-auto text-lg font-bold text-white bg-black border-4 border-black shadow-brutal-sm">
               Innovative solutions built with cutting-edge tech
             </p>
           </div>
@@ -128,37 +129,37 @@ const Projects = () => {
               >
                 {/* Header */}
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-14 h-14 bg-white border-4 border-black shadow-brutal-sm flex items-center justify-center flex-shrink-0">
+                  <div className="flex items-center justify-center flex-shrink-0 bg-white border-4 border-black w-14 h-14 shadow-brutal-sm">
                     <project.icon className="w-7 h-7" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start justify-between gap-2">
                       <div>
                         <h3 className="text-2xl font-black uppercase">{project.title}</h3>
-                        <p className="font-bold text-sm">{project.subtitle}</p>
+                        <p className="text-sm font-bold">{project.subtitle}</p>
                       </div>
                       {project.award && (
-                        <Badge className="bg-black text-white text-xs">{project.award}</Badge>
+                        <Badge className="text-xs text-white bg-black">{project.award}</Badge>
                       )}
                     </div>
                   </div>
                 </div>
 
                 {/* Category */}
-                <Badge variant="outline" className="bg-white mb-4">{project.category}</Badge>
+                <Badge variant="outline" className="mb-4 bg-white">{project.category}</Badge>
 
                 {/* Description */}
-                <p className="font-medium mb-4">{project.description}</p>
+                <p className="mb-4 font-medium">{project.description}</p>
 
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="outline" className="bg-white text-xs">
+                    <Badge key={techIndex} variant="outline" className="text-xs bg-white">
                       {tech}
                     </Badge>
                   ))}
                   {project.technologies.length > 3 && (
-                    <Badge variant="outline" className="bg-black text-white text-xs">
+                    <Badge variant="outline" className="text-xs text-white bg-black">
                       +{project.technologies.length - 3}
                     </Badge>
                   )}
@@ -167,7 +168,7 @@ const Projects = () => {
                 {/* View Details Button */}
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button className="w-full bg-black text-white border-4 border-black hover:bg-white hover:text-black">
+                    <Button className="w-full text-white bg-black border-4 border-black hover:bg-white hover:text-black">
                       VIEW DETAILS
                       <ExternalLink className="w-4 h-4 ml-2" />
                     </Button>
@@ -184,17 +185,17 @@ const Projects = () => {
                         )}
                       </DialogTitle>
                     </DialogHeader>
-                    <div className="space-y-6 pt-4">
+                    <div className="pt-4 space-y-6">
                       <p className="font-medium leading-relaxed">
                         {project.fullDescription}
                       </p>
                       
-                      <div className="bg-white border-4 border-black p-4">
-                        <h4 className="font-black uppercase mb-3">KEY FEATURES</h4>
+                      <div className="p-4 bg-white border-4 border-black">
+                        <h4 className="mb-3 font-black uppercase">KEY FEATURES</h4>
                         <ul className="space-y-2">
                           {project.features.map((feature, fIndex) => (
                             <li key={fIndex} className="flex items-start gap-2">
-                              <div className="w-2 h-2 bg-black mt-2 flex-shrink-0" />
+                              <div className="flex-shrink-0 w-2 h-2 mt-2 bg-black" />
                               <span className="font-medium">{feature}</span>
                             </li>
                           ))}
@@ -202,10 +203,10 @@ const Projects = () => {
                       </div>
 
                       <div className="bg-[#FFE500] border-4 border-black p-4">
-                        <h4 className="font-black uppercase mb-3">TECHNOLOGIES</h4>
+                        <h4 className="mb-3 font-black uppercase">TECHNOLOGIES</h4>
                         <div className="flex flex-wrap gap-2">
                           {project.technologies.map((tech, techIndex) => (
-                            <Badge key={techIndex} className="bg-white text-black border-2 border-black">
+                            <Badge key={techIndex} className="text-black bg-white border-2 border-black">
                               {tech}
                             </Badge>
                           ))}
@@ -214,7 +215,7 @@ const Projects = () => {
 
                       {project.achievements && (
                         <div className="bg-[#00FF94] border-4 border-black p-4">
-                          <h4 className="font-black uppercase mb-3">ACHIEVEMENTS</h4>
+                          <h4 className="mb-3 font-black uppercase">ACHIEVEMENTS</h4>
                           <div className="space-y-2">
                             {project.achievements.map((achievement, aIndex) => (
                               <div key={aIndex} className="flex items-center gap-2">
